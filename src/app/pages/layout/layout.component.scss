@@ -1,0 +1,17 @@
+
+
+.p-input-icon-left {
+  margin-left: 25px;
+  margin-top: 35px;
+}
+
+
+:host ::ng-deep.p-inputtext {
+  width: 700px;
+  border-radius: 5px;
+}
+
+:host ::ng-deep.p-avatar {
+  margin-left: 130px;
+  margin-top: 20px;
+}
