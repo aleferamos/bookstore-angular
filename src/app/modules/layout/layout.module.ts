@@ -11,7 +11,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+
   ]
 })
 export class LayoutModule { }

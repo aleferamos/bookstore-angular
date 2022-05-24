@@ -7,11 +7,77 @@
 
 
 :host ::ng-deep.p-inputtext {
-  width: 700px;
+  width: 94%;
+  margin-top: 2em;
+  margin-left: 5%;
   border-radius: 5px;
 }
 
-:host ::ng-deep.p-avatar {
-  margin-left: 130px;
-  margin-top: 20px;
+
+
+:host ::ng-deep .money {
+  background-color: rgb(66, 167, 35);
+}
+
+// .col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-9 {
+//   border: solid 1px;
+// }
+
+.product-item {
+  .product-item-content {
+      border: 1px solid var(--surface-d);
+      border-radius: 3px;
+      margin: .3rem;
+      text-align: center;
+      padding: 2rem 0;
+  }
+
+  .product-image {
+      width: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+  }
+}
+
+.banner {
+  width: 50%;
+  height: 100px;
+  border: solid 2px white;
+  color: white;
+  border-radius: 35px;
+  margin-bottom: 2em;
+
+  h1 {
+    margin-top: 1em;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+
+.anuncios {
+  h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+
+.background {
+  background-image: url("https://bookstorebr.s3.sa-east-1.amazonaws.com/b5f797ae-5427-4c1a-b482-14fe9e672891.jpg");
+  background-repeat: no-repeat;
+  padding-left: 10%;
+  padding-right: 10%;
+
+}
+
+.icons {
+  font-size: 0.5rem;
+  margin-top: 2.7em;
+  cursor: pointer;
+}
+
+.cart-texts {
+  font-size: 13px;
+  margin-top: 2em;
+}
+
+.margin-2em {
+  margin-top: 2em;
 }

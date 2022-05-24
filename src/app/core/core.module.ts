@@ -6,6 +6,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import {BadgeModule} from 'primeng/badge';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [],
@@ -13,6 +16,14 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
     CommonModule,
 
   ],
-  exports: [CalendarModule,ImageModule,InputTextModule,BadgeModule,AvatarModule,AvatarGroupModule]
+  exports: [CalendarModule,
+    ImageModule,
+    InputTextModule,
+    BadgeModule,
+    AvatarModule,
+    AvatarGroupModule,
+    CarouselModule,
+    ButtonModule,
+    OverlayPanelModule]
 })
 export class CoreModule { }
