@@ -9,6 +9,8 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {DialogModule} from 'primeng/dialog';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [],
@@ -24,6 +26,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     AvatarGroupModule,
     CarouselModule,
     ButtonModule,
-    OverlayPanelModule]
+    OverlayPanelModule,
+    DialogModule,
+    RadioButtonModule,
+  ]
 })
 export class CoreModule { }

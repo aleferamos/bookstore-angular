@@ -3,4 +3,6 @@ export interface IEndereco {
   cep: String;
   complemento: String;
   numero: Number;
+  cidade: string;
+  estado: string;
 }

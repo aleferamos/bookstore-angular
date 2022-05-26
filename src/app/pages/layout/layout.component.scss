@@ -1,18 +1,15 @@
-
-
 .p-input-icon-left {
   margin-left: 25px;
   margin-top: 35px;
 }
 
 
-:host ::ng-deep.p-inputtext {
+.input-search {
   width: 94%;
   margin-top: 2em;
   margin-left: 5%;
   border-radius: 5px;
 }
-
 
 
 :host ::ng-deep .money {
@@ -25,16 +22,16 @@
 
 .product-item {
   .product-item-content {
-      border: 1px solid var(--surface-d);
-      border-radius: 3px;
-      margin: .3rem;
-      text-align: center;
-      padding: 2rem 0;
+    border: 1px solid var(--surface-d);
+    border-radius: 3px;
+    margin: .3rem;
+    text-align: center;
+    padding: 2rem 0;
   }
 
   .product-image {
-      width: 50%;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    width: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
   }
 }
 
@@ -81,3 +78,10 @@
 .margin-2em {
   margin-top: 2em;
 }
+
+.btn-cadastro {
+  margin-left: 1em;
+  margin-top: 2em;
+  color: white;
+}
+
