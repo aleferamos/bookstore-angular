@@ -30,7 +30,7 @@ export class LayoutComponent implements OnInit {
   cart: IAnuncioList[] = [];
   responsiveOptions;
   subtotal = 0;
-  displayModal: boolean = true;
+  displayModal: boolean;;
   disabledFalseInputs: boolean = true;
   cep: IViaCep = {} as IViaCep;
   form: FormGroup;
@@ -94,7 +94,7 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  showModalDialog() {
+  showModalCreateAccount() {
     this.displayModal = true;
   }
 
