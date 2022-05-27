@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { IEndereco } from './../../shared/interface/endereco';
 import { IUsuario } from './../../shared/interface/usuario';
 import { IPessoaSave } from './../../shared/interface/pessoa';
@@ -18,6 +19,7 @@ import {
 import { ViaCepService } from 'src/app/shared/service/other-services.service';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, NgControl } from '@angular/forms';
 import { PessoaService } from 'src/app/shared/service/pessoa.service';
+import { SpinnerHandlerService } from 'src/app/shared/service/Spinner_request/spinner-handler.service';
 
 @Component({
   selector: 'app-layout',
@@ -28,23 +30,31 @@ export class LayoutComponent implements OnInit {
 
   anuncios: IAnuncioList[];
   cart: IAnuncioList[] = [];
-  responsiveOptions;
-  subtotal = 0;
-  displayModal: boolean;;
-  disabledFalseInputs: boolean = true;
   cep: IViaCep = {} as IViaCep;
   form: FormGroup;
   pessoaSave: IPessoaSave = {} as IPessoaSave;
   usuarioSave: IUsuario = {} as IUsuario;
   enderecoSave: IEndereco = {} as IEndereco;
+  anunciosByName: IAnuncioList[];
+
+  responsiveOptions;
+  subtotal = 0;
+  displayModal: boolean;;
+  disabledFalseInputs: boolean = true;
   error_msg: string;
   success_msg: boolean;
+  input_search: string;
+  displayBooksSearchedByNome:boolean = false;
+  loadRequest: boolean;
+
 
   constructor(
     private anuncioService: AnuncioService,
     private viaCepService: ViaCepService,
     private formBuilder: FormBuilder,
-    private pessoaService: PessoaService) {
+    private pessoaService: PessoaService,
+    private http: HttpClient
+    ) {
       this.form = this.formBuilder.group({
         nome: [''],
         email: [''],
@@ -65,9 +75,13 @@ export class LayoutComponent implements OnInit {
   }
 
   async loadAnuncios() {
-    const anuncio = this.anuncioService.listar();
-    this.anuncios = await lastValueFrom(anuncio);
+    const anuncio = this.anuncioService.listar("");
+    anuncio.then(success => {
+      this.anuncios = success!.content;
+    })
   }
+
+
 
   async loadCep(event){
     this.cep = await lastValueFrom(this.viaCepService.search_cep(this.form.value.cep));
@@ -98,6 +112,10 @@ export class LayoutComponent implements OnInit {
     this.displayModal = true;
   }
 
+  showBooksSearchedByNome(){
+    this.displayBooksSearchedByNome = true;
+  }
+
 
   removeCart(book: IAnuncioList) {
     this.cart.splice(this.cart.indexOf(book), 1)
@@ -112,6 +130,18 @@ export class LayoutComponent implements OnInit {
       this.form.get('estado')?.enable();
       this.form.get('numero')?.enable();
     }
+  }
+
+  loadAnuncioByNome(){
+    const anuncio = this.anuncioService.listar(this.input_search);
+    anuncio.then(success => {
+      this.anunciosByName = success!.content;
+      if(this.anunciosByName.length > 0 && this.input_search.length > 0){
+        this.showBooksSearchedByNome();
+      }  else {
+        this.displayBooksSearchedByNome = false;
+      }
+    });
   }
 
   createAccount(){
@@ -136,7 +166,7 @@ export class LayoutComponent implements OnInit {
       this.success_msg = true;
       this.error_msg = '';
     }).catch(error => {
-      console.log(error.error);
+      (error.error);
       this.success_msg = false;
         this.error_msg = error.error.erro
     });

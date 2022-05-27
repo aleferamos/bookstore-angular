@@ -11,6 +11,8 @@ import {ButtonModule} from 'primeng/button';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {DialogModule} from 'primeng/dialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     OverlayPanelModule,
     DialogModule,
     RadioButtonModule,
+    ProgressSpinnerModule
   ]
 })
 export class CoreModule { }

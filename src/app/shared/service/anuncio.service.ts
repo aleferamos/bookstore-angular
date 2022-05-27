@@ -14,12 +14,10 @@ export class AnuncioService {
   constructor(private http: HttpClient){}
 
 
-  listar(): Observable<IAnuncioList[]>{
+  async listar(nome: string){
 
-    const url = `${environment.api}/anuncio`
+    const url = `${environment.api}/anuncio?nome=${nome}`
 
-    return this.http.get<IPage<IAnuncioList>>(url).pipe(
-      map(response => response.content)
-    );
+    return await this.http.get<IPage<IAnuncioList>>(url).toPromise();
   }
 }

@@ -6,11 +6,37 @@
     <div class="col-7">
       <div class="grid">
         <div class="col-7">
-          <input type="text" class="input-search" pInputText placeholder="Buscar Livro">
-        </div>
-        <div class="col-1">
-          <button pButton pRipple type="button" icon="pi pi-search"
-            class="p-button-rounded p-button-info margin-2em"></button>
+          <div class="grid">
+            <div class="col-12">
+              <span class="p-input-icon-right" style="width: 100%;">
+                <input type="text" class="input-search" [(ngModel)]="input_search" (keyup)="loadAnuncioByNome()"
+                  placeholder="Buscar livro" pInputText />
+              </span>
+            </div>
+            <div class="col-12">
+              <div class="window-books-searched" *ngIf="displayBooksSearchedByNome">
+                <div *ngFor="let book of anunciosByName">
+                  <div class="box-books">
+                    <div class="grid">
+                      <div class="col-2">
+                        <p-image src="https://bookstorebr.s3.sa-east-1.amazonaws.com/{{book.nomeImagem}}" alt="Image"
+                          width="40"></p-image>
+                      </div>
+                      <div class="col-10">
+                        <h4 style="text-align: center; margin-top: 3em">{{book.livro!.titulo}}</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
         </div>
         <div class="col-3">
           <button pButton pRipple type="button" label="Cadastrar-se"
@@ -20,65 +46,71 @@
 
 
             <form [formGroup]="form">
-            <div class="grid">
-              <div class="col-4">
-                <input type="text" style="width: 100%;" formControlName="nome" placeholder="Normal Completo" pInputText />
+              <div class="grid">
+                <div class="col-4">
+                  <input type="text" style="width: 100%;" formControlName="nome" placeholder="Normal Completo"
+                    pInputText />
+                </div>
+                <div class="col-4">
+                  <input type="email" style="width: 100%;" formControlName="email" placeholder="E-mail" pInputText />
+                </div>
+                <div class="col-4">
+                  <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText />
+                </div>
               </div>
-              <div class="col-4">
-                <input type="email" style="width: 100%;" formControlName="email" placeholder="E-mail" pInputText />
+              <br>
+              <hr><br>
+              <div class="grid">
+                <div class="col-2">
+                  <input type="text" style="width: 100%;" formControlName="cep" placeholder="Cep" pInputText />
+                </div>
+                <div class="col-1">
+                  <button pButton pRipple type="button" (click)="loadCep($event)" icon="pi pi-search"
+                    class="p-button-rounded p-button-success p-button-outlined"></button>
+                </div>
+                <div class="col-4">
+                  <div class="field-radiobutton">
+                    <p-radioButton style="margin-top: 0.5em" name="city" (click)="disabledInputs($event)"
+                      value="Chicago" inputId="city1"></p-radioButton>
+                    <label style="margin-top: 0.5em" for="inputs">Não sei meu cep</label>
+                  </div>
+                </div>
               </div>
-              <div class="col-4">
-                <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText />
+              <br>
+              <div class="grid">
+                <div class="col-4">
+                  <input type="text" style="width: 100%;" formControlName="endereco" placeholder="Endereco"
+                    pInputText />
+                </div>
+                <div class="col-4">
+                  <input type="text" style="width: 100%;" formControlName="complemento" placeholder="Complemento"
+                    pInputText />
+                </div>
+                <div class="col-4">
+                  <input type="text" style="width: 100%;" formControlName="cidade" placeholder="Cidade" pInputText />
+                </div>
+                <div class="col-2">
+                  <input type="text" style="width: 100%;" formControlName="estado" placeholder="Estado" pInputText />
+                </div>
+                <div class="col-2">
+                  <input type="number" style="width: 100%;" formControlName="numero" placeholder="Número" pInputText />
+                </div>
               </div>
-            </div>
-            <br><hr><br>
-            <div class="grid">
-              <div class="col-2">
-                <input type="text" style="width: 100%;" formControlName="cep" placeholder="Cep" pInputText />
+              <br>
+              <div class="grid">
+                <div class="col-12">
+                  <p style="font-size: 13px; color: red;">{{this.error_msg}}</p>
+                  <p style="font-size: 13px; color: green;" *ngIf="success_msg">Cadastrado com sucesso!!</p>
+                </div>
               </div>
-              <div class="col-1">
-                <button pButton pRipple type="button" (click)="loadCep($event)" icon="pi pi-search"
-                  class="p-button-rounded p-button-success p-button-outlined"></button>
+              <div class="grid">
+                <div class="col-12">
+                  <button pButton pRipple type="button" (click)="createAccount()" label="Cadastrar"
+                    class="p-button-rounded p-button-success"></button>
+                </div>
               </div>
-              <div class="col-4">
-                <div class="field-radiobutton">
-                  <p-radioButton style="margin-top: 0.5em" name="city" (click)="disabledInputs($event)" value="Chicago" inputId="city1"></p-radioButton>
-                  <label style="margin-top: 0.5em" for="inputs">Não sei meu cep</label>
-              </div>
-              </div>
-            </div>
-            <br>
-            <div class="grid">
-              <div class="col-4">
-                <input type="text" style="width: 100%;" formControlName="endereco" placeholder="Endereco" pInputText />
-              </div>
-              <div class="col-4">
-                <input type="text"  style="width: 100%;" formControlName="complemento" placeholder="Complemento" pInputText />
-              </div>
-              <div class="col-4">
-                <input type="text"  style="width: 100%;" formControlName="cidade" placeholder="Cidade" pInputText />
-              </div>
-              <div class="col-2">
-                <input type="text"  style="width: 100%;" formControlName="estado" placeholder="Estado" pInputText />
-              </div>
-              <div class="col-2">
-                <input type="number"  style="width: 100%;" formControlName="numero" placeholder="Número" pInputText />
-              </div>
-            </div>
-            <br>
-            <div class="grid">
-              <div class="col-12">
-                <p style="font-size: 13px; color: red;">{{this.error_msg}}</p>
-                <p style="font-size: 13px; color: green;" *ngIf="success_msg">Cadastrado com sucesso!!</p>
-              </div>
-            </div>
-            <div class="grid">
-              <div class="col-12">
-                <button pButton pRipple type="button" (click)="createAccount()" label="Cadastrar" class="p-button-rounded p-button-success"></button>
-              </div>
-            </div>
 
-          </form>
+            </form>
           </p-dialog>
         </div>
       </div>
@@ -211,3 +243,4 @@
     </p-carousel>
   </div>
 </div>
+<app-spinner></app-spinner>
