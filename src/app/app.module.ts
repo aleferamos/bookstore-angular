@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { LayoutComponent } from './pages/layout/layout.component';
+import { LayoutComponent } from './modules/layout/layout_component/layout.component';
 import { LayoutModule } from './modules/layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

@@ -1,12 +1,12 @@
-import { RequestService } from './../../shared/service/request/request.service';
-import { TransferLivroService } from './../../shared/service/Transfer_object/TransferLivro.service';
-import { IEndereco } from './../../shared/interface/endereco';
-import { IUsuario } from './../../shared/interface/usuario';
-import { IPessoaSave } from './../../shared/interface/pessoa';
-import { IViaCep } from './../../shared/interface/other-interfaces';
+import { RequestService } from '../../../shared/service/request/request.service';
+import { TransferLivroService } from '../../../shared/service/Transfer_object/TransferLivro.service';
+import { IEndereco } from '../../../shared/interface/endereco';
+import { IUsuario } from '../../../shared/interface/usuario';
+import { IPessoaSave } from '../../../shared/interface/pessoa';
+import { IViaCep } from '../../../shared/interface/other-interfaces';
 import {
   IAnuncioList
-} from './../../shared/interface/anuncio';
+} from '../../../shared/interface/anuncio';
 import {
   Component,
   OnInit
