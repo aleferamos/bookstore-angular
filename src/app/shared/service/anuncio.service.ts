@@ -13,11 +13,4 @@ export class AnuncioService {
 
   constructor(private http: HttpClient){}
 
-
-  async listar(nome: string){
-
-    const url = `${environment.api}/anuncio?nome=${nome}`
-
-    return await this.http.get<IPage<IAnuncioList>>(url).toPromise();
-  }
 }

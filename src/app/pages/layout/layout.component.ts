@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { RequestService } from './../../shared/service/request/request.service';
+import { TransferLivroService } from './../../shared/service/Transfer_object/TransferLivro.service';
 import { IEndereco } from './../../shared/interface/endereco';
 import { IUsuario } from './../../shared/interface/usuario';
 import { IPessoaSave } from './../../shared/interface/pessoa';
@@ -7,19 +8,14 @@ import {
   IAnuncioList
 } from './../../shared/interface/anuncio';
 import {
-  AnuncioService
-} from './../../shared/service/anuncio.service';
-import {
   Component,
   OnInit
 } from '@angular/core';
 import {
-  lastValueFrom
+  lastValueFrom, Subscription
 } from 'rxjs';
 import { ViaCepService } from 'src/app/shared/service/other-services.service';
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, NgControl } from '@angular/forms';
-import { PessoaService } from 'src/app/shared/service/pessoa.service';
-import { SpinnerHandlerService } from 'src/app/shared/service/Spinner_request/spinner-handler.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
@@ -28,7 +24,6 @@ import { SpinnerHandlerService } from 'src/app/shared/service/Spinner_request/sp
 })
 export class LayoutComponent implements OnInit {
 
-  anuncios: IAnuncioList[];
   cart: IAnuncioList[] = [];
   cep: IViaCep = {} as IViaCep;
   form: FormGroup;
@@ -36,8 +31,8 @@ export class LayoutComponent implements OnInit {
   usuarioSave: IUsuario = {} as IUsuario;
   enderecoSave: IEndereco = {} as IEndereco;
   anunciosByName: IAnuncioList[];
+  book: IAnuncioList
 
-  responsiveOptions;
   subtotal = 0;
   displayModal: boolean;;
   disabledFalseInputs: boolean = true;
@@ -45,16 +40,17 @@ export class LayoutComponent implements OnInit {
   success_msg: boolean;
   input_search: string;
   displayBooksSearchedByNome:boolean = false;
-  loadRequest: boolean;
-
+  subscription: Subscription;
 
   constructor(
-    private anuncioService: AnuncioService,
     private viaCepService: ViaCepService,
     private formBuilder: FormBuilder,
-    private pessoaService: PessoaService,
-    private http: HttpClient
+    private transferLivroService: TransferLivroService,
+    private requestService: RequestService<any>
     ) {
+
+      this.subscription = this.transferLivroService.livros$.subscribe(book => {this.addCart(book);})
+
       this.form = this.formBuilder.group({
         nome: [''],
         email: [''],
@@ -68,23 +64,11 @@ export class LayoutComponent implements OnInit {
       });
     }
 
-
-
-  ngOnInit(): void {
-    this.loadAnuncios();
-  }
-
-  async loadAnuncios() {
-    const anuncio = this.anuncioService.listar("");
-    anuncio.then(success => {
-      this.anuncios = success!.content;
-    })
-  }
-
-
+  ngOnInit(): void {}
 
   async loadCep(event){
     this.cep = await lastValueFrom(this.viaCepService.search_cep(this.form.value.cep));
+
     this.form.get('endereco')?.setValue(this.cep.logradouro);
     this.form.get('complemento')?.setValue(this.cep.complemento);
     this.form.get('cidade')?.setValue(this.cep.localidade);
@@ -133,7 +117,7 @@ export class LayoutComponent implements OnInit {
   }
 
   loadAnuncioByNome(){
-    const anuncio = this.anuncioService.listar(this.input_search);
+    const anuncio = this.requestService.get('anuncio', this.input_search);
     anuncio.then(success => {
       this.anunciosByName = success!.content;
       if(this.anunciosByName.length > 0 && this.input_search.length > 0){
@@ -162,7 +146,7 @@ export class LayoutComponent implements OnInit {
 
 
 
-    this.pessoaService.createAccount(this.pessoaSave).then(sucess => {
+    this.requestService.post('pessoa', this.pessoaSave).then(sucess => {
       this.success_msg = true;
       this.error_msg = '';
     }).catch(error => {

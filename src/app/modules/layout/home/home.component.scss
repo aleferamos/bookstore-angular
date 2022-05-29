@@ -1,0 +1,25 @@
+:host ::ng-deep .money {
+  background-color: rgb(66, 167, 35);
+}
+
+// .col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-9 {
+//   border: solid 1px;
+// }
+
+.product-item {
+  .product-item-content {
+    border: 1px solid var(--surface-d);
+    border-radius: 3px;
+    margin: .3rem;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+
+}
+
+.anuncios {
+  h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}

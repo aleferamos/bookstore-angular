@@ -11,12 +11,4 @@ import { Injectable } from '@angular/core';
 export class PessoaService {
 
   constructor(private http: HttpClient){}
-
-
-  async createAccount(pessoa: IPessoaSave){
-
-    const url = `${environment.api}/pessoa`
-
-    await this.http.post(url, pessoa).toPromise()
-  }
 }

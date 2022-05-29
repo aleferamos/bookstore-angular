@@ -32,19 +32,12 @@
               </div>
             </div>
           </div>
-
-
-
-
-
         </div>
         <div class="col-3">
           <button pButton pRipple type="button" label="Cadastrar-se"
             class="p-button-outlined p-button-rounded btn-cadastro" (click)="showModalCreateAccount()"></button>
           <p-dialog header="Cadastro" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
             [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-
-
             <form [formGroup]="form">
               <div class="grid">
                 <div class="col-4">
@@ -109,7 +102,6 @@
                     class="p-button-rounded p-button-success"></button>
                 </div>
               </div>
-
             </form>
           </p-dialog>
         </div>
@@ -122,13 +114,10 @@
             <i class="pi pi-bell" pBadge value="5" size="xlarge" severity="info"
               style="font-size: 30px; float: right; margin-top: 1.3em; color: white;"></i>
           </div>
-
-
           <div class="flex align-items-center justify-content-center w-4rem h-4rem  border-round m-2">
             <i class="pi pi-shopping-cart" pBadge value="{{cart.length}}" (click)="op.toggle($event)" size="xlarge"
               severity="danger" style="font-size: 30px; float: right;  margin-top: 1.3em; color: white"></i>
           </div>
-
           <p-overlayPanel [style]="{width: '25%'}" #op [showTransitionOptions]="'100ms'"
             [hideTransitionOptions]="'100ms'" [dismissable]="true">
             <div class="grid" *ngFor="let book of cart">
@@ -156,7 +145,6 @@
               </div>
             </div>
           </p-overlayPanel>
-
           <div class="flex align-items-center justify-content-center w-4rem h-4rem text-white border-round m-2">
             <p-avatar shape="circle" class="margin-2em" image="assets/perfil.jpg" size="xlarge"></p-avatar>
           </div>
@@ -164,7 +152,6 @@
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="flex justify-content-center flex-wrap card-container yellow-container">
       <div class="banner">
@@ -173,74 +160,4 @@
     </div>
   </div>
 
-  <div class="anuncios">
-    <h2 style="margin-left: 2.2em;">Mais procurados</h2>
-    <p-carousel [value]="anuncios" [numVisible]="3" [numScroll]="1" [circular]="true"
-      [responsiveOptions]="responsiveOptions">
-
-      <ng-template let-anuncio pTemplate="item">
-        <div class="product-item">
-          <div class="product-item-content">
-            <div class="p-mb-3">
-              <p-image src="https://bookstorebr.s3.sa-east-1.amazonaws.com/{{anuncio.nomeImagem}}" alt="Image"
-                width="100"></p-image>
-            </div>
-            <div>
-              <h4 class="p-mb-1">{{anuncio.livro.titulo}}</h4>
-              <h3 class="p-mt-0 p-mb-3">R$ {{anuncio.preco}},00</h3>
-
-              <button pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
-                Anuncio</button>
-
-              <div class="car-buttons p-mt-5">
-                <p-button type="button" styleClass="p-button mr-3" icon="pi pi-shopping-cart"
-                  (click)="addCart(anuncio)"></p-button>
-                <p-button type="button" styleClass="money" icon="pi pi-shopping-bag"></p-button>
-                <button pButton pRipple type="button" icon="pi pi-heart"
-                  class="p-button-rounded p-button-help p-button-outlined" style="margin-left: 1em;"></button>
-                <i pBadge value="{{anuncio.curtida}}" severity="info" style="margin-left: 0.3em;"></i>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </p-carousel>
-  </div>
-
-  <div class="anuncios">
-    <h2 style="margin-left: 2.2em;">Mais curtidos</h2>
-    <p-carousel [value]="anuncios" [numVisible]="3" [numScroll]="1" [circular]="true"
-      [responsiveOptions]="responsiveOptions">
-
-      <ng-template let-anuncio pTemplate="item">
-        <div class="product-item">
-          <div class="product-item-content">
-            <div class="p-mb-3">
-              <p-image src="https://bookstorebr.s3.sa-east-1.amazonaws.com/{{anuncio.nomeImagem}}" alt="Image"
-                width="100"></p-image>
-            </div>
-            <div>
-              <h4 class="p-mb-1">{{anuncio.livro.titulo}}</h4>
-              <h3 class="p-mt-0 p-mb-3">R$ {{anuncio.preco}}</h3>
-
-              <button pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
-                Anuncio</button>
-
-              <div class="car-buttons p-mt-5">
-                <p-button type="button" styleClass="p-button mr-3" icon="pi pi-shopping-cart"
-                  (click)="addCart(anuncio)"></p-button>
-                <p-button type="button" styleClass="money" icon="pi pi-shopping-bag"></p-button>
-                <button pButton pRipple type="button" icon="pi pi-heart"
-                  class="p-button-rounded p-button-help p-button-outlined" style="margin-left: 1em;"></button>
-                <i pBadge value="{{anuncio.curtida}}" severity="info" style="margin-left: 0.3em;"></i>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </p-carousel>
-  </div>
-</div>
-<app-spinner></app-spinner>
+  <router-outlet></router-outlet>

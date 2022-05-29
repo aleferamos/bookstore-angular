@@ -1,3 +1,4 @@
+import { HomeComponent } from './modules/layout/home/home.component';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import { SpinnerInterceptorService } from './shared/service/Spinner_request/spin
     AppComponent,
     LayoutComponent,
     SpinnerComponent,
+    HomeComponent
 
   ],
   imports: [

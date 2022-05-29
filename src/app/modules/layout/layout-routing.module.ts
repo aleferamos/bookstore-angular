@@ -4,8 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/pages/layout/layout.component';
 
 const routes: Routes = [
-  {path: '', component: LayoutComponent},
-  // {path: '/cadastro', component: HomeComponent},
+  {path: '', component: LayoutComponent,
+    children: [
+    {path: 'home', component: HomeComponent},
+  ]
+},
 ];
 
 @NgModule({
