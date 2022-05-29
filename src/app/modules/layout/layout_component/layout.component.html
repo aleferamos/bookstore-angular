@@ -38,12 +38,19 @@
             class="p-button-outlined p-button-rounded btn-cadastro" (click)="showModalCreateAccount()"></button>
           <p-dialog header="Cadastro" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
             [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-            <form [formGroup]="form">
+
+
+            <form [formGroup]="form_pessoa">
               <div class="grid">
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="nome" placeholder="Normal Completo"
                     pInputText />
                 </div>
+              </div>
+            </form>
+
+            <form [formGroup]="form_usuario">
+              <div class="grid">
                 <div class="col-4">
                   <input type="email" style="width: 100%;" formControlName="email" placeholder="E-mail" pInputText />
                 </div>
@@ -51,8 +58,9 @@
                   <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText />
                 </div>
               </div>
-              <br>
-              <hr><br>
+            </form>
+            <hr><br>
+            <form [formGroup]="form_endereco">
               <div class="grid">
                 <div class="col-2">
                   <input type="text" style="width: 100%;" formControlName="cep" placeholder="Cep" pInputText />
@@ -69,7 +77,7 @@
                   </div>
                 </div>
               </div>
-              <br>
+
               <div class="grid">
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="endereco" placeholder="Endereco"
