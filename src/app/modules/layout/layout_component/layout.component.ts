@@ -33,7 +33,7 @@ export class LayoutComponent implements OnInit {
   pessoaSave: IPessoaSave = {} as IPessoaSave;
   usuarioSave: IUsuario = {} as IUsuario;
   enderecoSave: IEndereco = {} as IEndereco;
-  anunciosByName: IAnuncioList[];
+  anunciosByName: any[];
   book: IAnuncioList
 
   subtotal = 0;
@@ -119,8 +119,10 @@ export class LayoutComponent implements OnInit {
   }
 
   loadAnuncioByNome(){
-    this.requestService.get('anuncio', this.input_search).then(success => {
-      this.anunciosByName = success!.content;
+    this.requestService.get('googlebook', this.input_search).then(success => {
+      this.anunciosByName = success!.items;
+
+
       if(this.anunciosByName.length > 0 && this.input_search.length > 0){
         this.showBooksSearchedByNome();
       }  else {

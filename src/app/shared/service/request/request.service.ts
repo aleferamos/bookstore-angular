@@ -10,11 +10,20 @@ export class RequestService<T> {
 
   constructor(private http: HttpClient){}
 
-  async get(path: string, params?: string){
+  async get(path: string, pathVariable?: string ,params?: string, page?: boolean){
 
     var url = `${environment.api}/${path}`
 
-    return await this.http.get<IPage<T>>(url, {params: new HttpParams().set('nome', params!)}).toPromise();
+    if(pathVariable){
+      var url = `${environment.api}/${path}/${pathVariable}`;
+    }
+
+    if(page){
+      return await this.http.get<IPage<T>>(url, {params: new HttpParams().set('nome', params!)}).toPromise();
+    } else {
+      return await this.http.get<T>(url, {params: new HttpParams().set('nome', params!)}).toPromise();
+    }
+
   }
 
   async post(path: string ,object: T){
