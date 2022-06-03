@@ -19,9 +19,9 @@ export class RequestService<T> {
     }
 
     if(page){
-      return await this.http.get<IPage<T>>(url, {params: new HttpParams().set('nome', params!)}).toPromise();
+      return await this.http.get<IPage<T>>(url, {params: new HttpParams().set('nome', params! ? params : '')}).toPromise();
     } else {
-      return await this.http.get<T>(url, {params: new HttpParams().set('nome', params!)}).toPromise();
+      return await this.http.get<T>(url, {params: new HttpParams().set('nome', params! ? params : '')}).toPromise();
     }
 
   }

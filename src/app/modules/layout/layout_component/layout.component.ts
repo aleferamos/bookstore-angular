@@ -33,7 +33,7 @@ export class LayoutComponent implements OnInit {
   pessoaSave: IPessoaSave = {} as IPessoaSave;
   usuarioSave: IUsuario = {} as IUsuario;
   enderecoSave: IEndereco = {} as IEndereco;
-  anunciosByName: any[];
+  anunciosByName: any [] = [];
   book: IAnuncioList
 
   subtotal = 0;
@@ -76,7 +76,7 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async loadCep(event){
+  async loadCep(event: any){
     this.cep = await lastValueFrom(this.viaCepService.search_cep(this.form_endereco.value.cep));
 
     this.form_endereco.get('endereco')?.setValue(this.cep.logradouro);
@@ -112,23 +112,22 @@ export class LayoutComponent implements OnInit {
     this.subtotal -= book.preco;
   }
 
-  disabledInputs(event){
+  disabledInputs(event: any){
     if(event){
       this.form_endereco.enable();
     }
   }
 
   loadAnuncioByNome(){
-    this.requestService.get('googlebook', this.input_search).then(success => {
-      this.anunciosByName = success!.items;
 
+    this.input_search.length > 1 ? this.requestService.get('googlebook', this.input_search).then(success => {
 
+      this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks);
       if(this.anunciosByName.length > 0 && this.input_search.length > 0){
         this.showBooksSearchedByNome();
-      }  else {
-        this.displayBooksSearchedByNome = false;
       }
-    });
+    }) : this.displayBooksSearchedByNome = false;
+
   }
 
   createAccount(){
