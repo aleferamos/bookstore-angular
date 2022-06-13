@@ -1,3 +1,4 @@
+import { ConfirmationService } from 'primeng/api';
 import { RequestService } from '../../../shared/service/request/request.service';
 import { TransferLivroService } from '../../../shared/service/Transfer_object/TransferLivro.service';
 import { IEndereco } from '../../../shared/interface/endereco';
@@ -9,7 +10,8 @@ import {
 } from '../../../shared/interface/anuncio';
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import {
   lastValueFrom, Subscription
@@ -17,14 +19,15 @@ import {
 import { ViaCepService } from 'src/app/shared/service/other-services.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { fromFormToEntity } from 'src/app/shared/utils/fromFormToEntity.utils';
+import { style, state, animate, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-    styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  providers: [ConfirmationService]
 })
 export class LayoutComponent implements OnInit {
-
   cart: IAnuncioList[] = [];
   cep: IViaCep = {} as IViaCep;
   form_pessoa: FormGroup;
@@ -42,8 +45,8 @@ export class LayoutComponent implements OnInit {
   error_msg: string;
   success_msg: boolean;
   input_search: string;
-  displayBooksSearchedByNome:boolean = false;
   subscription: Subscription;
+  timeselectorOpen = false;
 
   constructor(
     private viaCepService: ViaCepService,
@@ -90,6 +93,7 @@ export class LayoutComponent implements OnInit {
   }
 
   addCart(book: IAnuncioList) {
+
     if (this.cart.includes(book)) {
       this.subtotal += 0;
     } else {
@@ -100,10 +104,6 @@ export class LayoutComponent implements OnInit {
 
   showModalCreateAccount() {
     this.displayModal = true;
-  }
-
-  showBooksSearchedByNome(){
-    this.displayBooksSearchedByNome = true;
   }
 
 
@@ -120,13 +120,11 @@ export class LayoutComponent implements OnInit {
 
   loadAnuncioByNome(){
 
-    this.input_search.length > 1 ? this.requestService.get('googlebook', this.input_search).then(success => {
 
-      this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks);
-      if(this.anunciosByName.length > 0 && this.input_search.length > 0){
-        this.showBooksSearchedByNome();
-      }
-    }) : this.displayBooksSearchedByNome = false;
+
+    this.input_search.length > 1 ? this.requestService.get('googlebook', this.input_search).then(success => {
+      this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks)}
+      ) : null;
 
   }
 

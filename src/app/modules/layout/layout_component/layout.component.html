@@ -10,28 +10,32 @@
             <div class="col-12">
               <span class="p-input-icon-right" style="width: 100%;">
                 <input type="text" class="input-search" [(ngModel)]="input_search" (keyup)="loadAnuncioByNome()"
-                  placeholder="Buscar livro" pInputText />
+                  (keyup)="input_search.length > 1 ? op.show($event) : op.hide()" placeholder="Buscar livro"
+                  pInputText />
               </span>
             </div>
             <div class="col-12">
-              <div class="window-books-searched" *ngIf="displayBooksSearchedByNome">
-                <div *ngFor="let book of anunciosByName">
-                  <div class="box-books">
-                    <div class="grid">
 
-                      <div class="col-2">
-                        <p-image src="{{book.volumeInfo?.imageLinks?.thumbnail}}" alt="Image"
-                          width="80"></p-image>
-                      </div>
 
-                      <div class="col-10">
-                        <h4 style="text-align: center; margin-top: 3em">{{book.volumeInfo.title}}</h4>
+              <p-overlayPanel #op [style]="{width: '25%'}">
+                <ng-template pTemplate>
+                  <div *ngFor="let book of anunciosByName">
+                    <div class="box-books">
+                      <div class="grid">
+                        <div class="col-2">
+                          <p-image src="{{book.volumeInfo?.imageLinks?.thumbnail}}" alt="Image" width="80"></p-image>
+                        </div>
+                        <div class="col-10">
+                          <h4 style="text-align: center; margin-top: 3em">{{book.volumeInfo.title}}</h4>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </ng-template>
+              </p-overlayPanel>
 
-                </div>
-              </div>
+
+
             </div>
           </div>
         </div>
@@ -125,15 +129,14 @@
               style="font-size: 30px; float: right; margin-top: 1.3em; color: white;"></i>
           </div>
           <div class="flex align-items-center justify-content-center w-4rem h-4rem  border-round m-2">
-            <i class="pi pi-shopping-cart" pBadge value="{{cart.length}}" (click)="op.toggle($event)" size="xlarge"
+            <i class="pi pi-shopping-cart" pBadge value="{{cart.length}}" (click)="tCart.toggle($event)" size="xlarge"
               severity="danger" style="font-size: 30px; float: right;  margin-top: 1.3em; color: white"></i>
           </div>
-          <p-overlayPanel [style]="{width: '25%'}" #op [showTransitionOptions]="'100ms'"
+          <p-overlayPanel [style]="{width: '25%'}" #tCart [showTransitionOptions]="'100ms'"
             [hideTransitionOptions]="'100ms'" [dismissable]="true">
             <div class="grid" *ngFor="let book of cart">
               <div class="col-2">
-                <p-image src="https://bookstorebr.s3.sa-east-1.amazonaws.com/{{book.nomeImagem}}" alt="Image"
-                  width="30"></p-image>
+                <p-image src="assets/images_posts/{{book.nomeImagem}}" alt="Image" width="30"></p-image>
               </div>
               <div class="col-6">
                 <p class="cart-texts">{{book.livro?.titulo}}</p>
@@ -165,9 +168,10 @@
   <div class="card">
     <div class="flex justify-content-center flex-wrap card-container yellow-container">
       <div class="banner">
-        <h1>PromoCode - Book20</h1>
+        <h3>PromoCode - Book20</h3>
       </div>
     </div>
   </div>
+</div>
 
   <router-outlet></router-outlet>
