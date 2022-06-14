@@ -78,3 +78,27 @@
   .box-books:hover {
     opacity: 0.6;
   }
+
+  .my-account {
+    color: white;
+    margin-top: 3em;
+    margin-left: 2em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    cursor: pointer;
+  }
+
+  .input-myAccount {
+    width: 100%;
+  }
+
+  .forgot-password-inputmyAccount {
+    margin: 0px;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  }
+
+  .forgot-password-inputmyAccount:hover {
+    color: rgb(116, 116, 116);
+  }
