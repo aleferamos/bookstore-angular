@@ -21,9 +21,6 @@ export class ResetPasswordComponent implements OnInit {
 
 
   mensagens = {
-    nome: [
-      { tipo: 'required', mensagem: 'Nome é obrigatório'},
-      { tipo: 'minlength', mensagem: 'O nome tem que conter ao menos 3 caracteres!'}],
     email: [
       { tipo: 'email', mensagem: 'Digite um e-mail válido'},
       { tipo: 'required', mensagem: 'O e-mail é obrigatório!'}],
@@ -33,9 +30,6 @@ export class ResetPasswordComponent implements OnInit {
     senhaConfirmada: [
       { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
       { tipo: 'comparacao', mensagem: 'Senhas não conferem' }],
-
-    telefone: [
-      { tipo: 'required', mensagem: 'O telefone é obrigatório' }],
   };
   constructor(
     private formBuilder: FormBuilder,
