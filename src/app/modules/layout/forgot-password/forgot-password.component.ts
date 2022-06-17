@@ -32,28 +32,17 @@ export class ForgotPasswordComponent implements OnInit {
   forgot_passWord(){
 
     this.passwordReset = fromFormToEntity(this.form_forgotPassword);
-
-    console.log(this.passwordReset);
-
-
     this.loadingRequest = true;
 
     this.accountService.forgot_password(this.passwordReset).then(success => {
-
       this.loadingRequest = false;
-
       this.messageRequestSuccess = success.message;
-
       this.messageRequestFail = false;
 
     }).catch(error => {
-
       this.loadingRequest = false;
-
       this.messageRequestFail = error.error.erro;
-
       this.messageRequestSuccess = false;
-
     });
 
   }
