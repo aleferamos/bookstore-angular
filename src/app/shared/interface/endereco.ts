@@ -6,3 +6,13 @@ export interface IEndereco {
   cidade: string;
   estado: string;
 }
+
+export interface IEnderecoAuthenticad {
+  id: number;
+  endereco: string;
+  cep: string;
+  complemento: string;
+  numero: number;
+  idade: string;
+  estado: string;
+}

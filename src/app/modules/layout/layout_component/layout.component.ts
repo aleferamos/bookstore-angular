@@ -1,3 +1,8 @@
+import { Router } from '@angular/router';
+import { PessoaService } from './../../../shared/service/pessoa.service';
+import { IPessoaAuthenticad } from './../../../shared/interface/pessoa';
+import { IToken } from './../../../shared/interface/IToken';
+import { AccountService } from './../../../shared/service/account.service';
 import { ConfirmationService } from 'primeng/api';
 import { RequestService } from '../../../shared/service/request/request.service';
 import { TransferLivroService } from '../../../shared/service/Transfer_object/TransferLivro.service';
@@ -14,7 +19,8 @@ import {
   ViewChild
 } from '@angular/core';
 import {
-  lastValueFrom, Subscription
+  interval,
+  lastValueFrom, Observable, Subscription
 } from 'rxjs';
 import { ViaCepService } from 'src/app/shared/service/other-services.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -33,11 +39,13 @@ export class LayoutComponent implements OnInit {
   form_pessoa: FormGroup;
   form_usuario: FormGroup;
   form_endereco: FormGroup;
+  form_login: FormGroup;
   pessoaSave: IPessoaSave = {} as IPessoaSave;
   usuarioSave: IUsuario = {} as IUsuario;
   enderecoSave: IEndereco = {} as IEndereco;
   anunciosByName: any [] = [];
   book: IAnuncioList
+  pessoaAuthenticad: IPessoaAuthenticad = {} as IPessoaAuthenticad;
 
   subtotal = 0;
   displayModal: boolean = false;
@@ -47,12 +55,19 @@ export class LayoutComponent implements OnInit {
   input_search: string;
   subscription: Subscription;
   timeselectorOpen = false;
+  text_msg_login;
+  userIsAuthenticad = false;
+  value: number = 0;
+  loadingLogin = false;
 
   constructor(
     private viaCepService: ViaCepService,
     private formBuilder: FormBuilder,
     private transferLivroService: TransferLivroService,
-    private requestService: RequestService<any>
+    private requestService: RequestService<any>,
+    private accountService: AccountService,
+    private pessoaService: PessoaService,
+    private route:Router
     ) {
 
       this.subscription = this.transferLivroService.livros$.subscribe(book => {this.addCart(book);})
@@ -75,9 +90,31 @@ export class LayoutComponent implements OnInit {
         numero: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required)
       })
 
+      this.form_login = this.formBuilder.group({
+        email: ['alefepdias@gmail.com'],
+        senha: ['alefek159']
+      })
+
+      this.isAuthenticad();
     }
 
   ngOnInit(): void {}
+
+  async isAuthenticad(){
+    let token: IToken = {} as IToken;
+
+    token.token = window.localStorage.getItem("token")!;
+
+    if(token.token){
+      this.accountService.tokenIsValid(token).then(async success => {
+        if(success){
+          this.userIsAuthenticad = true;
+
+          this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
+        }
+      })
+    }
+  }
 
   async loadCep(event: any){
     this.cep = await lastValueFrom(this.viaCepService.search_cep(this.form_endereco.value.cep));
@@ -106,6 +143,24 @@ export class LayoutComponent implements OnInit {
     this.displayModal = true;
   }
 
+  login(){
+    this.accountService.login(this.form_login.value).then(success => {
+      this.text_msg_login = undefined;
+      this.loadingLogin = true;
+        if(success){
+          setTimeout(() => {
+            location.reload();
+          }, 1300);
+        }
+
+    }).catch(error =>{
+      if(error.status == 403){
+        this.text_msg_login = "Senha incorreta!"
+      }
+      this.text_msg_login = error.error.erro;
+    });
+
+  }
 
   removeCart(book: IAnuncioList) {
     this.cart.splice(this.cart.indexOf(book), 1)
@@ -119,13 +174,9 @@ export class LayoutComponent implements OnInit {
   }
 
   loadAnuncioByNome(){
-
-
-
     this.input_search.length > 1 ? this.requestService.get('googlebook', this.input_search).then(success => {
       this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks)}
       ) : null;
-
   }
 
   createAccount(){
@@ -147,5 +198,25 @@ export class LayoutComponent implements OnInit {
         this.error_msg = error.error.erro
     });
 
+  }
+
+
+  logout(){
+    this.accountService.logoff();
+    setTimeout(() => {
+      location.reload();
+    }, 300);
+  }
+
+  teste(){
+
+    console.log(this.loadingLogin);
+
+  }
+
+  routerLink(link: string){
+    setTimeout(() => {
+      this.route.navigate([link]);
+    }, 200);
   }
 }

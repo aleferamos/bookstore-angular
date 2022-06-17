@@ -10,3 +10,11 @@ export interface IViaCep {
   ddd: string;
   siafi: string;
 }
+
+export interface MessageRequestPassword {
+  timestamp: number;
+  status: number;
+  error: string;
+  message: string;
+  path: string;
+}

@@ -1,5 +1,5 @@
 import { IPage } from './../../interface/page';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -10,7 +10,7 @@ export class RequestService<T> {
 
   constructor(private http: HttpClient){}
 
-  async get(path: string, pathVariable?: string ,params?: string, page?: boolean){
+  async get(path: string, pathVariable?: string ,params?: string, page?: boolean, headers?: HttpHeaders){
 
     var url = `${environment.api}/${path}`
 

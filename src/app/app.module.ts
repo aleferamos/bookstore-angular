@@ -1,3 +1,5 @@
+import { ResetPasswordComponent } from './modules/layout/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './modules/layout/forgot-password/forgot-password.component';
 import { HomeComponent } from './modules/layout/home/home.component';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
@@ -18,8 +20,9 @@ import { SpinnerInterceptorService } from './shared/service/Spinner_request/spin
     AppComponent,
     LayoutComponent,
     SpinnerComponent,
-    HomeComponent
-
+    HomeComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
 <div class="background">
   <div class="grid">
     <div class="col-1">
-      <p-image src="assets/logo.png" alt="Image" width="140"></p-image>
+      <p-image (click)="routerLink('/home')" class="logo" src="assets/logo.png" alt="Image" width="140"></p-image>
     </div>
-    <div class="col-7">
+    <div class="col-5">
       <div class="grid">
         <div class="col-7">
           <div class="grid">
@@ -43,7 +43,7 @@
             <form [formGroup]="form_pessoa">
               <div class="grid">
                 <div class="col-4">
-                  <input type="text" style="width: 100%;" formControlName="nome" placeholder="Normal Completo"
+                  <input type="text" style="width: 100%;" formControlName="nome" placeholder="Nome e sobrenome"
                     pInputText />
                 </div>
               </div>
@@ -71,9 +71,8 @@
                 </div>
                 <div class="col-4">
                   <div class="field-radiobutton">
-                    <p-radioButton style="margin-top: 0.5em" name="city" (click)="disabledInputs($event)"
-                      value="Chicago" inputId="city1"></p-radioButton>
-                    <label style="margin-top: 0.5em" for="inputs">Não sei meu cep</label>
+                    <p-radioButton name="city" (click)="disabledInputs($event)"></p-radioButton>
+                    <label for="inputs">Não sei meu cep</label>
                   </div>
                 </div>
               </div>
@@ -115,7 +114,7 @@
         </div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-5">
       <div class="card">
         <div class="flex justify-content-end flex-wrap card-container green-container">
           <div class="flex align-items-center justify-content-center w-4rem h-4rem  font-bold  border-round m-2">
@@ -152,25 +151,55 @@
               </div>
             </div>
           </p-overlayPanel>
-          <h4 class="my-account" (click)="myAcc.toggle($event)">Minha Conta <i class="pi pi-angle-down"
-              style="font-size: 1rem"></i></h4>
-          <p-overlayPanel #myAcc [style]="{width: '15%'}">
+
+          <h4 *ngIf="!userIsAuthenticad" class="my-account" (click)="creatAcc.toggle($event)">Minha Conta <i
+              class="pi pi-angle-down" style="font-size: 1rem"></i></h4>
+
+          <h4 *ngIf="userIsAuthenticad" class="my-account" (click)="myAcc.toggle($event)">{{pessoaAuthenticad.nome}} <i
+              class="pi pi-angle-down" style="font-size: 1rem"></i></h4>
+
+              <p-overlayPanel #myAcc [style]="{width: '15%'}">
+                <ng-template pTemplate>
+                  <div class="grid">
+                    <div class="col-12">
+                      <h4 class="menuMyAcount"><i class="pi pi-user" style="padding-right: 1em;"></i>  Minhas informações</h4>
+                      <h4 class="menuMyAcount"> <i class="pi pi-shopping-bag" style="padding-right: 1em;"></i> Meus pedidos</h4>
+                      <h4 class="menuMyAcount" (click)="logout()"><i class="pi pi-sign-out" style="padding-right: 1em;"></i> Sair</h4>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-overlayPanel>
+
+          <p-overlayPanel #creatAcc [style]="{width: '15%'}">
             <ng-template pTemplate>
+
               <div class="grid">
-                <div class="col-12">
-                  <input type="text" class="p-inputtext-sm input-myAccount" placeholder="Email" pInputText />
-                </div>
-                <div class="col-12">
-                  <input type="password" class="p-inputtext-sm input-myAccount" placeholder="Senha" pInputText />
+                <form class="input-myAccount" [formGroup]="form_login">
+                  <div class="col-12">
+                    <input type="text" formControlName="email" class="p-inputtext-sm input-myAccount"
+                      placeholder="Email" pInputText />
+                  </div>
+                  <div class="col-12">
+                    <input type="password" formControlName="senha" class="p-inputtext-sm input-myAccount"
+                      placeholder="Senha" pInputText />
+                  </div>
+                </form>
+                <div *ngIf="loadingLogin" class="col-12">
+                  <p-progressBar  mode="indeterminate"></p-progressBar>
                 </div>
                 <div class="col-4">
-                  <button pButton pRipple type="button" label="Entrar" class="p-button-success"></button>
+                  <button pButton pRipple type="button"  (click)="login()" label="Entrar"
+                    class="p-button-success"></button>
                 </div>
                 <div class="col-8">
-                  <button pButton pRipple type="button" label="Cadastrar-se" (click)="showModalCreateAccount()" class="p-button-rounded"></button>
+                  <button pButton pRipple type="button" label="Cadastrar-se" (click)="showModalCreateAccount()"
+                    class="p-button-rounded"></button>
                 </div>
                 <div class="col-12">
-                  <p class="forgot-password-inputmyAccount">Esqueci minha senha</p>
+                  <h5 style="margin: 0; color:red">{{text_msg_login}}</h5>
+                </div>
+                <div style="padding-top: 0px; margin-top: 0px;" class="col-12">
+                  <p (click)="routerLink('/forgot_password')" class="forgot-password-inputmyAccount">Esqueci minha senha</p>
                 </div>
               </div>
             </ng-template>
