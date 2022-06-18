@@ -12,8 +12,7 @@ export class TransferLivroService {
     // Observable string sources
     private livrosSource = new Subject<IAnuncioList>();
 
-    // Observable string streams
-  livros$ = this.livrosSource.asObservable();
+    livros$ = this.livrosSource.asObservable();
 
   salvar(book: IAnuncioList) {
     this.livrosSource.next(book);

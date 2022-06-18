@@ -1,3 +1,4 @@
+import { ProtectedRout } from './../../../shared/guard/protectedRout.guard';
 import { Router } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa.service';
 import { IPessoaAuthenticad } from './../../../shared/interface/pessoa';

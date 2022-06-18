@@ -1,3 +1,4 @@
+import { ProtectedRout } from './../../shared/guard/protectedRout.guard';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
     {path: 'home', component: HomeComponent},
     {path: 'forgot_password', component: ForgotPasswordComponent},
-    {path: 'reset_password/:token', component: ResetPasswordComponent},
+    {path: 'reset_password/:token', canActivate: [ProtectedRout], component: ResetPasswordComponent},
   ]
 },
 ];

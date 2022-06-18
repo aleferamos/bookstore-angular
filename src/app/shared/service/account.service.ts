@@ -1,3 +1,4 @@
+import { Observable, map } from 'rxjs';
 import { MessageRequestPassword } from './../interface/other-interfaces';
 import { IForgotPassword, IResetPassword } from './../interface/pessoa';
 import { IToken } from './../interface/IToken';
@@ -51,6 +52,15 @@ export class AccountService {
     const result = await this.http.post<any>(url, reset_password).toPromise();
 
     return result;
+  }
+
+  tokenExists(token: string): Observable<Boolean>{
+    const url = `${environment.api}/autenticacao/tokenIsValid/${token}`;
+
+    return this.http.get<Boolean>(url).pipe(
+      map(response => response)
+    );
+
   }
 
 }

@@ -39,6 +39,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.messageRequestSuccess = success.message;
       this.messageRequestFail = false;
 
+      console.log(success.message);
+
     }).catch(error => {
       this.loadingRequest = false;
       this.messageRequestFail = error.error.erro;
