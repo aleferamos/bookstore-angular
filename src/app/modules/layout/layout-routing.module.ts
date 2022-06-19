@@ -9,10 +9,11 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 const routes: Routes = [
   {path: '', component: LayoutComponent,
     children: [
-    {path: 'home', component: HomeComponent},
-    {path: 'forgot_password', component: ForgotPasswordComponent},
-    {path: 'reset_password/:token', canActivate: [ProtectedRout], component: ResetPasswordComponent},
-  ]
+      {path: 'home', component: HomeComponent},
+      {path: 'forgot_password', component: ForgotPasswordComponent},
+      {path: 'reset_password/:token', canActivate: [ProtectedRout], component: ResetPasswordComponent},
+      {path: 'reset_password', pathMatch: 'full', redirectTo:'home'},
+    ]
 },
 ];
 
