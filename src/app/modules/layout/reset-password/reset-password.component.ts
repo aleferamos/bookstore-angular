@@ -1,4 +1,3 @@
-import { TransferTokenResetService } from './../../../shared/service/Transfer_object/TransferTokenReset.service';
 import { comparaValidator } from './../../../validators/compara-validator';
 import { fromFormToEntity } from './../../../shared/utils/fromFormToEntity.utils';
 import { IResetPassword } from './../../../shared/interface/pessoa';
@@ -6,6 +5,7 @@ import { AccountService } from './../../../shared/service/account.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResetPasswordTokenService } from 'src/app/shared/service/resetPasswordToken.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -34,10 +34,9 @@ export class ResetPasswordComponent implements OnInit {
   };
   constructor(
     private formBuilder: FormBuilder,
-    private accountService: AccountService,
-    private transferTokenReset: TransferTokenResetService,
     private route: ActivatedRoute,
-    private router:Router) {
+    private router:Router,
+    private resetPasswordTokenService: ResetPasswordTokenService) {
     this.form_resetPassword = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirm: ['', Validators.required],
@@ -45,7 +44,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params =>  this.transferTokenReset.saveToken(params['token']))
   }
 
   reset_passoword(){
@@ -55,7 +53,7 @@ export class ResetPasswordComponent implements OnInit {
 
     if(this.form_resetPassword.valid){
 
-      this.accountService.reset_password(this.reset_password).then(success => {
+      this.resetPasswordTokenService.reset_password(this.reset_password).then(success => {
         this.messageRequestSuccess = success.message;
         this.messageRequestFail = false;
 

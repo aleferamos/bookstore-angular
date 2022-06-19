@@ -14,14 +14,16 @@ export class PessoaService {
     private http: HttpClient){}
 
     getUserAuthenticad(token: string): Observable<IPessoaAuthenticad> {
-
       var url = `${environment.api}/autenticacao/GetUSerAuthenticad`
-
      return this.http.get<IPessoaAuthenticad>(url, {headers: {Authorization: 'Bearer ' + token}, params: new HttpParams().set('token', token)}).pipe(
         map(response => response)
       );
+    }
 
-        // return await this.http.get<IPessoaAuthenticad>(url, {headers: {Authorization: 'Bearer ' + token}, params: new HttpParams().set('token', token)}).toPromise();
+    async save(pessoa: IPessoaSave){
 
+      const url = `${environment.api}/pessoa/salvar`
+
+      await this.http.post(url, pessoa).toPromise()
     }
 }

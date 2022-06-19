@@ -1,3 +1,4 @@
+import { ResetPasswordTokenService } from './../../../shared/service/resetPasswordToken.service';
 import { fromFormToEntity } from './../../../shared/utils/fromFormToEntity.utils';
 import { IForgotPassword } from './../../../shared/interface/pessoa';
 import { AccountService } from './../../../shared/service/account.service';
@@ -20,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private accountService: AccountService) {
+    private resetPasswordTokenService: ResetPasswordTokenService) {
     this.form_forgotPassword = this.formBuilder.group({
       email: ['alefepdias@gmail.com']
     })
@@ -34,7 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.passwordReset = fromFormToEntity(this.form_forgotPassword);
     this.loadingRequest = true;
 
-    this.accountService.forgot_password(this.passwordReset).then(success => {
+    this.resetPasswordTokenService.forgot_password(this.passwordReset).then(success => {
       this.loadingRequest = false;
       this.messageRequestSuccess = success.message;
       this.messageRequestFail = false;

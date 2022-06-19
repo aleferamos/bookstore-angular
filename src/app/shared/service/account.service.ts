@@ -37,30 +37,4 @@ export class AccountService {
   async logoff(): Promise<void> {
     window.localStorage.removeItem('token');
   }
-
-  async forgot_password(forgotPassword: IForgotPassword): Promise<MessageRequestPassword>{
-    const url = `${environment.api}/autenticacao/forgot-password`;
-
-    const result = await this.http.post<any>(url, forgotPassword).toPromise();
-
-    return result;
-  }
-
-  async reset_password(reset_password: IResetPassword): Promise<MessageRequestPassword>{
-    const url = `${environment.api}/autenticacao/reset-password`;
-
-    const result = await this.http.post<any>(url, reset_password).toPromise();
-
-    return result;
-  }
-
-  tokenExists(token: string): Observable<Boolean>{
-    const url = `${environment.api}/autenticacao/tokenIsValid/${token}`;
-
-    return this.http.get<Boolean>(url).pipe(
-      map(response => response)
-    );
-
-  }
-
 }

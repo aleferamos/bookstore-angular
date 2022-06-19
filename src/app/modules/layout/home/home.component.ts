@@ -1,16 +1,7 @@
-import {
-  TransferLivroService
-} from './../../../shared/service/Transfer_object/TransferLivro.service';
-import {
-  IAnuncioList
-} from './../../../shared/interface/anuncio';
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  RequestService
-} from 'src/app/shared/service/request/request.service';
+import { AnuncioService } from './../../../shared/service/anuncio.service';
+import {TransferLivroService} from './../../../shared/service/Transfer_object/TransferLivro.service';
+import {IAnuncioList} from './../../../shared/interface/anuncio';
+import {Component,OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -25,14 +16,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private transferLivroService: TransferLivroService,
-    private requestService: RequestService < any > ) {}
+    private anuncioService: AnuncioService) {}
 
   ngOnInit(): void {
     this.loadAnuncios();
   }
 
   async loadAnuncios() {
-    const anuncio = this.requestService.get('anuncio', '','', true);
+    const anuncio = this.anuncioService.getAllAnuncios('');
 
 
     anuncio.then(success => {

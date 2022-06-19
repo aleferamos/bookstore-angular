@@ -1,3 +1,4 @@
+import { googleBookService } from './../../../shared/service/googleBook.service';
 import { ProtectedRout } from './../../../shared/guard/protectedRout.guard';
 import { Router } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa.service';
@@ -5,7 +6,6 @@ import { IPessoaAuthenticad } from './../../../shared/interface/pessoa';
 import { IToken } from './../../../shared/interface/IToken';
 import { AccountService } from './../../../shared/service/account.service';
 import { ConfirmationService } from 'primeng/api';
-import { RequestService } from '../../../shared/service/request/request.service';
 import { TransferLivroService } from '../../../shared/service/Transfer_object/TransferLivro.service';
 import { IEndereco } from '../../../shared/interface/endereco';
 import { IUsuario } from '../../../shared/interface/usuario';
@@ -65,9 +65,9 @@ export class LayoutComponent implements OnInit {
     private viaCepService: ViaCepService,
     private formBuilder: FormBuilder,
     private transferLivroService: TransferLivroService,
-    private requestService: RequestService<any>,
     private accountService: AccountService,
     private pessoaService: PessoaService,
+    private googleBookService: googleBookService,
     private route:Router
     ) {
 
@@ -175,7 +175,7 @@ export class LayoutComponent implements OnInit {
   }
 
   loadAnuncioByNome(){
-    this.input_search.length > 1 ? this.requestService.get('googlebook', this.input_search).then(success => {
+    this.input_search.length > 1 ? this.googleBookService.getLivroByNome(this.input_search).then(success => {
       this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks)}
       ) : null;
   }
@@ -190,7 +190,7 @@ export class LayoutComponent implements OnInit {
     this.pessoaSave.usuario = this.usuarioSave;
 
 
-    this.requestService.post('pessoa', this.pessoaSave).then(sucess => {
+    this.pessoaService.save(this.pessoaSave).then(sucess => {
       this.success_msg = true;
       this.error_msg = '';
     }).catch(error => {
