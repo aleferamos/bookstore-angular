@@ -60,6 +60,7 @@ export class LayoutComponent implements OnInit {
   userIsAuthenticad = false;
   value: number = 0;
   loadingLogin = false;
+  spinnerLoadLivros = false;
 
   constructor(
     private viaCepService: ViaCepService,
@@ -174,7 +175,7 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  loadAnuncioByNome(){
+  loadLivrosByNome(){
     this.input_search.length > 1 ? this.googleBookService.getLivroByNome(this.input_search).then(success => {
       this.anunciosByName = success.items.filter((item: { volumeInfo: { imageLinks: any; }; }) => item.volumeInfo.imageLinks)}
       ) : null;

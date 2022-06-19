@@ -9,7 +9,7 @@
           <div class="grid">
             <div class="col-12">
               <span class="p-input-icon-right" style="width: 100%;">
-                <input type="text" class="input-search" [(ngModel)]="input_search" (keyup)="loadAnuncioByNome()"
+                <input type="text" class="input-search" [(ngModel)]="input_search" (keyup)="loadLivrosByNome()"
                   (keyup)="input_search.length > 1 ? op.show($event) : op.hide()" placeholder="Buscar livro"
                   pInputText />
               </span>
@@ -17,6 +17,7 @@
             <div class="col-12">
               <p-overlayPanel #op [style]="{width: '25%'}">
                 <ng-template pTemplate>
+                  <app-spinner></app-spinner>
                   <div *ngFor="let book of anunciosByName">
                     <div class="box-books">
                       <div class="grid">

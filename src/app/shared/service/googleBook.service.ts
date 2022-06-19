@@ -13,7 +13,6 @@ export class googleBookService {
 
       var url = `${environment.api}/googlebook/${nome}`;
 
-      console.log(url);
 
       return await this.http.get<any>(url).toPromise();
 
