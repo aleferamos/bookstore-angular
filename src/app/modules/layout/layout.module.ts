@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LayoutRoutingModule } from './layout-routing.module';
+import { SellComponent } from './sell/sell.component';
 
 @NgModule({
-  declarations: [
-
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     LayoutRoutingModule,

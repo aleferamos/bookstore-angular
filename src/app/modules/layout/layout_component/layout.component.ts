@@ -5,7 +5,7 @@ import { PessoaService } from './../../../shared/service/pessoa.service';
 import { IPessoaAuthenticad } from './../../../shared/interface/pessoa';
 import { IToken } from './../../../shared/interface/IToken';
 import { AccountService } from './../../../shared/service/account.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { TransferLivroService } from '../../../shared/service/Transfer_object/TransferLivro.service';
 import { IEndereco } from '../../../shared/interface/endereco';
 import { IUsuario } from '../../../shared/interface/usuario';
@@ -32,7 +32,7 @@ import { style, state, animate, transition, trigger } from '@angular/animations'
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class LayoutComponent implements OnInit {
   cart: IAnuncioList[] = [];
@@ -69,7 +69,8 @@ export class LayoutComponent implements OnInit {
     private accountService: AccountService,
     private pessoaService: PessoaService,
     private googleBookService: googleBookService,
-    private route:Router
+    private route:Router,
+    private messageService: MessageService
     ) {
 
       this.subscription = this.transferLivroService.livros$.subscribe(book => {this.addCart(book);})
@@ -220,9 +221,13 @@ export class LayoutComponent implements OnInit {
   sell(){
     if(localStorage.getItem("token")){
       setTimeout(() => {
-        this.route.navigate([""]);
+        this.route.navigate(["sell"]);
       }, 200);
+    } else {
+      this.messageService.add({key: 'tc', severity:'error', summary: 'Ops...', detail: 'Você precisa estar logado!'});
     }
+
   }
+
 
 }

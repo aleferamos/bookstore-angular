@@ -1,3 +1,4 @@
+import { SellComponent } from './modules/layout/sell/sell.component';
 import { ResetPasswordComponent } from './modules/layout/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './modules/layout/forgot-password/forgot-password.component';
 import { HomeComponent } from './modules/layout/home/home.component';
@@ -22,7 +23,8 @@ import { SpinnerInterceptorService } from './shared/service/Spinner_request/spin
     SpinnerComponent,
     HomeComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {CardModule} from 'primeng/card';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -34,7 +35,8 @@ import {CardModule} from 'primeng/card';
     RadioButtonModule,
     ProgressSpinnerModule,
     ProgressBarModule,
-    CardModule
+    CardModule,
+    ToastModule
   ]
 })
 export class CoreModule { }
