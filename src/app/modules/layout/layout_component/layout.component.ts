@@ -210,15 +210,19 @@ export class LayoutComponent implements OnInit {
     }, 300);
   }
 
-  teste(){
-
-    console.log(this.loadingLogin);
-
-  }
-
   routerLink(link: string){
     setTimeout(() => {
       this.route.navigate([link]);
     }, 200);
   }
+
+
+  sell(){
+    if(localStorage.getItem("token")){
+      setTimeout(() => {
+        this.route.navigate([""]);
+      }, 200);
+    }
+  }
+
 }

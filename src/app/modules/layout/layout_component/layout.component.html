@@ -7,6 +7,7 @@
       <div class="grid">
         <div class="col-7">
           <div class="grid">
+
             <div class="col-12">
               <span class="p-input-icon-right" style="width: 100%;">
                 <input type="text" class="input-search" [(ngModel)]="input_search" (keyup)="loadLivrosByNome()"
@@ -33,10 +34,15 @@
                 </ng-template>
               </p-overlayPanel>
             </div>
+
           </div>
+
+        </div>
+
+        <div class="col-2">
+          <button pButton pRipple style="margin-top: 1.9em;" (click)="sell()" type="button" label="Vender" class="p-button-outlined p-button-rounded p-button-secondary"></button>
         </div>
         <div class="col-3">
-
           <p-dialog header="Cadastro" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
             [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
@@ -113,8 +119,10 @@
             </form>
           </p-dialog>
         </div>
+
       </div>
     </div>
+
     <div class="col-5">
       <div class="card">
         <div class="flex justify-content-end flex-wrap card-container green-container">
@@ -159,17 +167,20 @@
           <h4 *ngIf="userIsAuthenticad" class="my-account" (click)="myAcc.toggle($event)">{{pessoaAuthenticad.nome}} <i
               class="pi pi-angle-down" style="font-size: 1rem"></i></h4>
 
-              <p-overlayPanel #myAcc [style]="{width: '15%'}">
-                <ng-template pTemplate>
-                  <div class="grid">
-                    <div class="col-12">
-                      <h4 class="menuMyAcount"><i class="pi pi-user" style="padding-right: 1em;"></i>  Minhas informações</h4>
-                      <h4 class="menuMyAcount"> <i class="pi pi-shopping-bag" style="padding-right: 1em;"></i> Meus pedidos</h4>
-                      <h4 class="menuMyAcount" (click)="logout()"><i class="pi pi-sign-out" style="padding-right: 1em;"></i> Sair</h4>
-                    </div>
-                  </div>
-                </ng-template>
-              </p-overlayPanel>
+          <p-overlayPanel #myAcc [style]="{width: '15%'}">
+            <ng-template pTemplate>
+              <div class="grid">
+                <div class="col-12">
+                  <h4 class="menuMyAcount"><i class="pi pi-user" style="padding-right: 1em;"></i> Minhas informações
+                  </h4>
+                  <h4 class="menuMyAcount"> <i class="pi pi-shopping-bag" style="padding-right: 1em;"></i> Meus pedidos
+                  </h4>
+                  <h4 class="menuMyAcount" (click)="logout()"><i class="pi pi-sign-out" style="padding-right: 1em;"></i>
+                    Sair</h4>
+                </div>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
 
           <p-overlayPanel #creatAcc [style]="{width: '15%'}">
             <ng-template pTemplate>
@@ -186,10 +197,10 @@
                   </div>
                 </form>
                 <div *ngIf="loadingLogin" class="col-12">
-                  <p-progressBar  mode="indeterminate"></p-progressBar>
+                  <p-progressBar mode="indeterminate"></p-progressBar>
                 </div>
                 <div class="col-4">
-                  <button pButton pRipple type="button"  (click)="login()" label="Entrar"
+                  <button pButton pRipple type="button" (click)="login()" label="Entrar"
                     class="p-button-success"></button>
                 </div>
                 <div class="col-8">
@@ -200,7 +211,8 @@
                   <h5 style="margin: 0; color:red">{{text_msg_login}}</h5>
                 </div>
                 <div style="padding-top: 0px; margin-top: 0px;" class="col-12">
-                  <p (click)="routerLink('/forgot_password')" class="forgot-password-inputmyAccount">Esqueci minha senha</p>
+                  <p (click)="routerLink('/forgot_password')" class="forgot-password-inputmyAccount">Esqueci minha senha
+                  </p>
                 </div>
               </div>
             </ng-template>
