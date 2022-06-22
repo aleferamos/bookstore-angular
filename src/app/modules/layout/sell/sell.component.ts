@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SellComponent implements OnInit {
 
+  imageChangedEvent: any;
+  base64: any;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

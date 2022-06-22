@@ -46,7 +46,7 @@
           <button pButton pRipple style="margin-top: 1.9em;" (click)="sell()" type="button" label="Vender" class="p-button-outlined p-button-rounded p-button-secondary"></button>
         </div>
         <div class="col-3">
-          <p-dialog header="Cadastro" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+          <p-dialog header="Cadastro" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw', height: '530px'}"
             [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
 
@@ -65,7 +65,22 @@
                   <input type="email" style="width: 100%;" formControlName="email" placeholder="E-mail" pInputText />
                 </div>
                 <div class="col-4">
-                  <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText />
+                  <!-- <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText /> -->
+                  <p-password weakLabel="Fraca" mediumLabel="Média" placeholder="Senha" formControlName="senha" strongLabel="Forte" promptLabel="Entre com a senha">
+                    <ng-template pTemplate="header">
+                        <h6>Digite a senha</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider></p-divider>
+                        <p class="mt-2">Sugestão</p>
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li>Pelo menos uma letra minúscula</li>
+                            <li>Pelo menos uma letra maiúscula</li>
+                            <li>Pelo menos um número</li>
+                            <li>minimo 8 caracteres</li>
+                        </ul>
+                    </ng-template>
+                </p-password>
                 </div>
               </div>
             </form>
@@ -112,7 +127,7 @@
                   <p style="font-size: 13px; color: red;">{{this.error_msg}}</p>
                   <p style="font-size: 13px; color: green;" *ngIf="success_msg">Cadastrado com sucesso!!</p>
                 </div>
-              </div>
+              </div><br><br><br>
               <div class="grid">
                 <div class="col-12">
                   <button pButton pRipple type="button" (click)="createAccount()" label="Cadastrar"

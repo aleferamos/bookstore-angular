@@ -15,7 +15,12 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {CardModule} from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
-
+import {InputMaskModule} from 'primeng/inputmask';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
+import {FileUploadModule} from 'primeng/fileupload';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,7 +41,13 @@ import {ToastModule} from 'primeng/toast';
     ProgressSpinnerModule,
     ProgressBarModule,
     CardModule,
-    ToastModule
+    ToastModule,
+    InputMaskModule,
+    InputNumberModule,
+    KeyFilterModule,
+    PasswordModule,
+    DividerModule,
+    FileUploadModule
   ]
 })
 export class CoreModule { }
