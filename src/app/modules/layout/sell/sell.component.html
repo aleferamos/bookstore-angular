@@ -5,8 +5,7 @@
         <div class="col-12">
           <textarea [rows]="10" [cols]="30" placeholder="Digite a descrição" pInputTextarea autoResize="autoResize"></textarea>
         </div>
-        <div class="col-4">
-          <!-- <input type="text" pInputText placeholder="Preço"> -->
+        <div class="col-1">
           <p-inputNumber placeholder="Digite o preço" inputId="currency-us" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
         </div>
         <div class="col-8">
@@ -59,23 +58,16 @@
               <div class="col-xs-12 col-sm-3 crop-res">
                 <div class="card">
                   <div class="card-body">
-                    <div *ngIf="imageUrls">
-                      <h4>Selecione uma imagem para editar</h4>
-                      <div>
-                        <img [src]="imageUrls" class="thumb" (click)="selectImg()" />
-                      </div>
-                    </div>
-
                     <div class="docs-buttons">
                       <div class="btn-group">
-                        <p-button label="Zoom" icon="pi pi-search-plus" (click)="zoom('positive')" styleClass="p-button-rounded"></p-button>
+                        <p-button icon="pi pi-search-plus" (click)="zoom('positive')" styleClass="p-button-rounded"></p-button>
 
-                        <p-button label="Zoom" icon="pi pi-search-minus" (click)="zoom('negative')" styleClass="p-button-rounded"></p-button>
+                        <p-button icon="pi pi-search-minus" (click)="zoom('negative')" styleClass="p-button-rounded"></p-button>
                       </div>
 
                       <div class="btn-group">
-                        <p-button label="Rotate left" (click)="rotate('left')" icon="pi pi-replay" styleClass="p-button-rounded"></p-button>
-                        <p-button label="Rotate right" (click)="rotate('right')" icon="pi pi-refresh" styleClass="p-button-rounded"></p-button>
+                        <p-button  (click)="rotate('left')" icon="pi pi-replay" styleClass="p-button-rounded"></p-button>
+                        <p-button  (click)="rotate('right')" icon="pi pi-refresh" styleClass="p-button-rounded"></p-button>
                       </div>
 
 
@@ -85,10 +77,10 @@
                       </div>
 
                       <div class="btn-group">
-                        <p-button label="Retirar área e corte" (click)="clear()" icon="pi pi-times" styleClass="p-button-rounded"></p-button>
+                        <p-button label="Foto completa" (click)="clear()" icon="pi pi-desktop" styleClass="p-button-rounded"></p-button>
                       </div>
                       <div class="btn-group">
-                        <p-button label="Aplicar imagem" (click)="saveImg()" icon="pi pi-times" styleClass="p-button-rounded"></p-button>
+                        <p-button label="Aplicar imagem" (click)="saveImg()" icon="pi pi-check" styleClass="p-button-rounded"></p-button>
                       </div>
 
                       <div style="display: none;">

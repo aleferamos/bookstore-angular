@@ -69,10 +69,11 @@ export class SellComponent implements AfterViewInit {
         that.showCropper = false;
         reader.onload = (eventCurr: ProgressEvent) => {
           that.imageUrls = (<FileReader>eventCurr.target).result;
+          this.imageUrl = that.imageUrls
         };
         reader.readAsDataURL(event.target.files[0]);
-
-    }
+      }
+      this.showCropper = true;
   }
 
   selectImg() {
