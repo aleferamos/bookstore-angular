@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptorService } from './shared/service/Spinner_request/spinner-interceptor.service';
+import { EditorImgComponent } from './components/editor-img/editor-img.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { SpinnerInterceptorService } from './shared/service/Spinner_request/spin
     HomeComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    SellComponent
+    SellComponent,
+    EditorImgComponent
   ],
   imports: [
     BrowserModule,

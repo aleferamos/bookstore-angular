@@ -22,6 +22,7 @@ import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AngularCropperjsModule } from 'angular-cropperjs';
+
 @NgModule({
   declarations: [],
   imports: [
