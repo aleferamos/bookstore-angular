@@ -112,9 +112,10 @@ export class LayoutComponent implements OnInit {
       this.accountService.tokenIsValid(token).then(async success => {
         if(success){
           this.userIsAuthenticad = true;
-
           this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
         }
+      }).catch(error => {
+        window.localStorage.removeItem('token')
       })
     }
   }
