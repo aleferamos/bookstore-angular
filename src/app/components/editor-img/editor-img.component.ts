@@ -1,5 +1,6 @@
+import { convertBase64ToFile } from './../../shared/utils/convertBase64ToFile.utils';
 import { CropperComponent } from 'angular-cropperjs';
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-editor-img',
@@ -7,6 +8,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angula
   styleUrls: ['./editor-img.component.scss']
 })
 export class EditorImgComponent implements AfterViewInit {
+
+  @Output() file = new EventEmitter<any>();
 
   imageUrl: any;
   imageUrls: any;
@@ -26,6 +29,7 @@ export class EditorImgComponent implements AfterViewInit {
   cropperResults;
   mergedRes: any;
   display: boolean = false;
+
 
   @ViewChild('angularCropper') public angularCropper: CropperComponent;
   @ViewChild("canvasEl") canvasEl: ElementRef;
@@ -75,9 +79,6 @@ export class EditorImgComponent implements AfterViewInit {
         reader.readAsDataURL(event.target.files[0]);
       }
       this.showCropper = true;
-
-
-
   }
 
   selectImg() {
@@ -151,12 +152,13 @@ export class EditorImgComponent implements AfterViewInit {
     this.cropperRes = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg');
   }
 
-  saveImg() {
+  async saveImg() {
+
     this.savedImg = true;
     // this.draw(this.cropperRes);
-    console.log(this.cropperRes);
+
+    this.file.emit(convertBase64ToFile(this.cropperRes));
+
 
   }
-
-
 }

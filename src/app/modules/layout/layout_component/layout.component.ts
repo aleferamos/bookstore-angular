@@ -90,7 +90,8 @@ export class LayoutComponent implements OnInit {
         complemento: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
         cidade: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
         estado: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
-        numero: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required)
+        numero: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
+        notExistCep: [true]
       })
 
       this.form_login = this.formBuilder.group({
@@ -113,9 +114,10 @@ export class LayoutComponent implements OnInit {
         if(success){
           this.userIsAuthenticad = true;
           this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
+        } else {
+          window.localStorage.removeItem('token')
         }
       }).catch(error => {
-        window.localStorage.removeItem('token')
       })
     }
   }

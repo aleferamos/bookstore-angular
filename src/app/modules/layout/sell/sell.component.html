@@ -2,56 +2,52 @@
   <div class="flex justify-content-center">
     <div class="grid">
       <div class="form-anuncio">
-
         <div class="grid">
           <div class="col-12">
             <h1 class="title-announce">Anunciar</h1>
           </div>
 
+          <form [formGroup]="form_anuncioSave">
+            <div class="grid">
+              <div class="col-12">
+                <app-editor-img (file)="addImage($event)"></app-editor-img>
+              </div>
+              <div style="display: none;">
+                <canvas #canvasEl width=0  height=0></canvas>
+              </div>
+              <div class="col-12">
+                <textarea [rows]="3" class="input-form" formControlName="descricao" [cols]="30" placeholder="Digite a descrição" pInputTextarea
+                  autoResize="autoResize"></textarea>
+              </div>
+              <div class="col-4">
+                <p-inputNumber placeholder="Digite o preço" class="input-form" formControlName="valor" inputId="currency-us" mode="currency" currency="BRL"
+                  locale="pt-BR"></p-inputNumber>
+              </div>
+              <div class="col-8">
+                <input type="text" class="input-form" formControlName="titulo" pInputText placeholder="Titulo">
+              </div>
+              <div class="col-7">
+                <input type="text" class="input-form" formControlName="autor" pInputText placeholder="Autor">
+              </div>
+              <div class="col-5">
+                <input type="text" class="input-form" formControlName="numeroPaginas" pKeyFilter="num" pInputText placeholder="Número de páginas">
+              </div>
+              <div class="col-2">
+                <input type="text" class="input-form" formControlName="edicao" pInputText placeholder="Edição">
+              </div>
+              <div class="col-4">
+                <input type="text" class="input-form" formControlName="anoDePublicacao" pKeyFilter="num" pInputText placeholder="Ano de publicação">
+              </div>
+              <div class="col-6">
+                <input type="text" class="input-form" formControlName="codigoDeBarras" pKeyFilter="num" pInputText placeholder="Código de barras">
+              </div>
+              <div class="col-3">
+                <button pButton pRipple type="button" (click)="anunciar()" label="Anunciar" class="p-button-raised p-button-success"></button>
+              </div>
+            </div>
 
-          <div class="col-12">
-            <app-editor-img></app-editor-img>
-          </div>
-
-          <div style="display: none;">
-            <canvas #canvasEl width=0  height=0></canvas>
-          </div>
-
-          <div class="col-12">
-            <textarea [rows]="3" class="input-form" [cols]="30" placeholder="Digite a descrição" pInputTextarea
-              autoResize="autoResize"></textarea>
-          </div>
-          <div class="col-4">
-            <p-inputNumber placeholder="Digite o preço" class="input-form" inputId="currency-us" mode="currency" currency="BRL"
-              locale="pt-BR"></p-inputNumber>
-          </div>
-          <div class="col-8">
-            <input type="text" class="input-form" pInputText placeholder="Titulo">
-          </div>
-          <div class="col-7">
-            <input type="text" class="input-form" pInputText placeholder="Autor">
-          </div>
-          <div class="col-5">
-            <input type="text" class="input-form" pKeyFilter="num" pInputText placeholder="Número de páginas">
-          </div>
-          <div class="col-2">
-            <input type="text" class="input-form" pInputText placeholder="Edição">
-          </div>
-          <div class="col-4">
-            <input type="text" class="input-form" pKeyFilter="num" pInputText placeholder="Ano de publicação">
-          </div>
-          <div class="col-6">
-            <input type="text" class="input-form" pKeyFilter="num" pInputText placeholder="Código de barras">
-          </div>
-          <div class="col-3">
-            <button pButton pRipple type="button" label="Anunciar" class="p-button-raised p-button-success"></button>
-          </div>
+          </form>
         </div>
-
-
-
-
-
       </div>
     </div>
   </div>
