@@ -1,6 +1,7 @@
 import { convertBase64ToFile } from './../../shared/utils/convertBase64ToFile.utils';
 import { CropperComponent } from 'angular-cropperjs';
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Output, Input, EventEmitter } from '@angular/core';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-editor-img',
@@ -36,7 +37,8 @@ export class EditorImgComponent implements AfterViewInit {
   private context: CanvasRenderingContext2D;
 
 
-  constructor() { }
+  constructor(
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -153,12 +155,7 @@ export class EditorImgComponent implements AfterViewInit {
   }
 
   async saveImg() {
-
     this.savedImg = true;
-    // this.draw(this.cropperRes);
-
     this.file.emit(convertBase64ToFile(this.cropperRes));
-
-
   }
 }

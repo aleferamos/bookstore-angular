@@ -45,12 +45,12 @@
           <p-button label="Resetar" (click)="clear()" icon="pi pi-sync" styleClass="p-button-rounded"></p-button>
         </div>
         <div class="btn-group">
-          <p-button label="Ocultar recorte" (click)="clear()" icon="pi pi-times" styleClass="p-button-rounded">
+          <p-button label="Retirar recorte" (click)="clear()" icon="pi pi-times" styleClass="p-button-rounded">
           </p-button>
         </div>
         <div class="btn-group">
-          <p-button label="Salvar imagem" (click)="saveImg()" icon="pi pi-check" styleClass="p-button-rounded">
-          </p-button>
+          <p-button *ngIf="!savedImg" label="Selecionar imagem" (click)="saveImg()" icon="pi pi-check" styleClass="p-button-rounded"></p-button>
+          <p-button *ngIf="savedImg" class="btn" label="Imagem Selecionada" (click)="saveImg()" icon="pi pi-check-square" styleClass="p-button-rounded p-button-success"></p-button>
         </div>
         <div *ngIf="downloadLink">
           <img [src]="downloadLink" />

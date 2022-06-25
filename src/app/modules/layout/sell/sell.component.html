@@ -1,49 +1,100 @@
 <div class="card">
+  <p-toast></p-toast>
   <div class="flex justify-content-center">
     <div class="grid">
       <div class="form-anuncio">
         <div class="grid">
-          <div class="col-12">
-            <h1 class="title-announce">Anunciar</h1>
-          </div>
-
+          <h1 class="title-announce">Anunciar</h1>
           <form [formGroup]="form_anuncioSave">
             <div class="grid">
               <div class="col-12">
                 <app-editor-img (file)="addImage($event)"></app-editor-img>
               </div>
-              <div style="display: none;">
-                <canvas #canvasEl width=0  height=0></canvas>
-              </div>
               <div class="col-12">
-                <textarea [rows]="3" class="input-form" formControlName="descricao" [cols]="30" placeholder="Digite a descrição" pInputTextarea
-                  autoResize="autoResize"></textarea>
+                <textarea [rows]="3" class="input-form" formControlName="descricao" [cols]="30"
+                  placeholder="Digite a descrição" pInputTextarea autoResize="autoResize"></textarea>
+                <ng-container *ngFor="let erro of mensagens['descricao']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('descricao')?.hasError(erro.tipo) && (form_anuncioSave.get('descricao')?.dirty || form_anuncioSave.get('descricao')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-4">
-                <p-inputNumber placeholder="Digite o preço" class="input-form" formControlName="valor" inputId="currency-us" mode="currency" currency="BRL"
-                  locale="pt-BR"></p-inputNumber>
+                <p-inputNumber placeholder="Digite o preço" class="input-form" formControlName="valor"
+                  inputId="currency-us" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+                <ng-container *ngFor="let erro of mensagens['valor']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('valor')?.hasError(erro.tipo) && (form_anuncioSave.get('valor')?.dirty || form_anuncioSave.get('valor')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-8">
                 <input type="text" class="input-form" formControlName="titulo" pInputText placeholder="Titulo">
+                <ng-container *ngFor="let erro of mensagens['titulo']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('titulo')?.hasError(erro.tipo) && (form_anuncioSave.get('titulo')?.dirty || form_anuncioSave.get('titulo')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-7">
                 <input type="text" class="input-form" formControlName="autor" pInputText placeholder="Autor">
+                <ng-container *ngFor="let erro of mensagens['autor']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('autor')?.hasError(erro.tipo) && (form_anuncioSave.get('autor')?.dirty || form_anuncioSave.get('autor')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-5">
-                <input type="text" class="input-form" formControlName="numeroPaginas" pKeyFilter="num" pInputText placeholder="Número de páginas">
+                <input type="text" class="input-form" formControlName="numeroPaginas" pKeyFilter="num" pInputText
+                  placeholder="Número de páginas">
+                <ng-container *ngFor="let erro of mensagens['numeroPaginas']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('numeroPaginas')?.hasError(erro.tipo) && (form_anuncioSave.get('numeroPaginas')?.dirty || form_anuncioSave.get('numeroPaginas')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-2">
                 <input type="text" class="input-form" formControlName="edicao" pInputText placeholder="Edição">
+                <ng-container *ngFor="let erro of mensagens['edicao']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('edicao')?.hasError(erro.tipo) && (form_anuncioSave.get('edicao')?.dirty || form_anuncioSave.get('edicao')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-4">
-                <input type="text" class="input-form" formControlName="anoDePublicacao" pKeyFilter="num" pInputText placeholder="Ano de publicação">
+                <input type="text" class="input-form" formControlName="anoDePublicacao" pKeyFilter="num" pInputText
+                  placeholder="Ano de publicação">
+                <ng-container *ngFor="let erro of mensagens['anoDePublicacao']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('anoDePublicacao')?.hasError(erro.tipo) && (form_anuncioSave.get('anoDePublicacao')?.dirty || form_anuncioSave.get('anoDePublicacao')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
               <div class="col-6">
-                <input type="text" class="input-form" formControlName="codigoDeBarras" pKeyFilter="num" pInputText placeholder="Código de barras">
+                <input type="text" class="input-form" formControlName="codigoDeBarras" pKeyFilter="num" pInputText
+                  placeholder="Código de barras">
+                <ng-container *ngFor="let erro of mensagens['codigoDeBarras']">
+                  <span class="msg-error"
+                    *ngIf="form_anuncioSave.get('codigoDeBarras')?.hasError(erro.tipo) && (form_anuncioSave.get('codigoDeBarras')?.dirty || form_anuncioSave.get('codigoDeBarras')?.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
               </div>
-              <div class="col-3">
-                <button pButton pRipple type="button" (click)="anunciar()" label="Anunciar" class="p-button-raised p-button-success"></button>
+              <div class="col-2">
+                <button pButton pRipple type="button" (click)="anunciar()" label="Anunciar"
+                  class="p-button-raised p-button-success"></button>
               </div>
+              <div class="col-9">
+                <p-progressSpinner *ngIf="loading" [style]="{width: '40px', height: '50px'}"></p-progressSpinner>
+                <h3 *ngIf="annoncied" style="margin-top: 0.2em ;"> <i class="pi pi-check" style="font-size: 2rem; color: green"></i> Anunciado com sucesso</h3>
+              </div><br><br><br><br><br><br>
             </div>
 
           </form>
