@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SystemComponent implements OnInit {
 
-  constructor() { }
+  files1:Carro[] = [];
+
+    files2: [];
+
+    cols: any[];
+
+  constructor() {
+    this.files1 = [
+      {nome:'civic', marca:'honda', modelo:'G2'},
+      {nome:'civic', marca:'honda', modelo:'G3'},
+      {nome:'civic', marca:'honda', modelo:'G4'},
+    ]
+  }
 
   ngOnInit(): void {
   }
 
+
+}
+export interface Carro {
+  nome: string;
+  marca: string;
+  modelo: string;
 }

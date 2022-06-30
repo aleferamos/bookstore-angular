@@ -25,6 +25,7 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TabViewModule} from 'primeng/tabview';
 import {SplitterModule} from 'primeng/splitter';
+// import {TreeTableModule} from 'primeng/treetable';
 
 @NgModule({
   declarations: [],
