@@ -1,7 +1,7 @@
 <div class="flex justify-content-center img">
   <p-image src="assets/admin-logo.png" alt="Image" width="150"></p-image>
 </div>
-<div class="flex justify-content-center flex-wrap card-container yellow-container">
+<div class="flex justify-content-center">
   <form [formGroup]="form_login">
     <p-card>
       <div class="col-12">
@@ -32,20 +32,23 @@
         </div>
       </div>
 
-      <p-confirmDialog #cd [style]="{width: '50vw'}">
+      <div class="flex justify-content-center">
+        <p-confirmDialog  #cd [style]="{width: '50vw'}">
 
-        <ng-template pTemplate="header">
-          <form [formGroup]="form_validate">
-            <h4>Digite o código que chegou em seu email!</h4>
-            <input type="text" pInputText formControlName="codigo" placeholder="Código" />
-            <button type="button" class="btn-validate" pButton icon="pi pi-check" label="Validar" (click)="cd.accept()"></button>
-          </form>
-        </ng-template>
+          <ng-template pTemplate="header">
+            <form [formGroup]="form_validate">
+              <h4>Digite o código que chegou em seu email!</h4>
+              <input type="text" pInputText formControlName="codigo" placeholder="Código" />
+              <button type="button" class="btn-validate" pButton icon="pi pi-check" label="Validar" (click)="cd.accept()"></button>
+            </form>
+          </ng-template>
 
-        <ng-template pTemplate="footer">
-          <!-- <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button> -->
-        </ng-template>
-      </p-confirmDialog>
+          <ng-template pTemplate="footer">
+            <!-- <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button> -->
+          </ng-template>
+        </p-confirmDialog>
+      </div>
+
     </p-card>
   </form>
 </div>

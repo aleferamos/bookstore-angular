@@ -46,3 +46,23 @@ input {
 .btn-validate {
   margin-top: 1em;
 }
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  width: 40%;
+}
+
+:host ::ng-deep .p-confirm-dialog .p-dialog-content {
+  width: 40%;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  width: 40%;
+}
+
+:host ::ng-deep .p-dialog {
+  box-shadow: none;
+}
+
+:host ::ng-deep .p-dialog {
+  margin-left: 30%;
+}

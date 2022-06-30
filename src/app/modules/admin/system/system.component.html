@@ -1,14 +1,47 @@
-
+<div class="background">
   <div class="header">
     <div class="grid">
-      <div class="col-5">
-        <div class="buttons">
-          s
-        </div>
-      </div>
-      <div class="col-5 col-offset-2">
+      <div class="col-10 col-offset-2">
         <img src="assets/perfil.jpg" alt="Image" width="70">
       </div>
     </div>
-
   </div>
+  <div class="content">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <span>Anuncios</span>
+        </ng-template>
+        <p-tabView styleClass="tabview-custom">
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-eye icon"></i>
+              <span>Para analisar</span>
+            </ng-template>
+
+            <p-splitter [style]="{'height': '300px'}">
+              <ng-template pTemplate>
+
+              </ng-template>
+              <ng-template pTemplate>
+                
+              </ng-template>
+            </p-splitter>
+          </p-tabPanel>
+
+          <p-tabPanel header="Header III">
+            <ng-template pTemplate="header">
+              <i class="pi pi-times icon"></i>
+              <span>Não autorizados</span>
+            </ng-template>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+              atque corrupti quos dolores et quas molestias excepturi sint occaecati
+              cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+              dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+              Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+          </p-tabPanel>
+        </p-tabView>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

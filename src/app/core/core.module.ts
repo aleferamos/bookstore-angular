@@ -23,6 +23,8 @@ import {DividerModule} from 'primeng/divider';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {TabViewModule} from 'primeng/tabview';
+import {SplitterModule} from 'primeng/splitter';
 
 @NgModule({
   declarations: [],
@@ -52,7 +54,9 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     DividerModule,
     FileUploadModule,
     AngularCropperjsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TabViewModule,
+    SplitterModule
   ]
 })
 export class CoreModule { }
