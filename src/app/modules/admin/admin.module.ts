@@ -8,10 +8,7 @@ import { SystemComponent } from './system/system.component';
 
 
 @NgModule({
-  declarations: [
-
-    SystemComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     AdminRoutingModule

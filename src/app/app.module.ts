@@ -1,3 +1,4 @@
+import { SystemComponent } from './modules/admin/system/system.component';
 import { LoginComponent } from './modules/admin/login/login.component';
 import { SellComponent } from './modules/layout/sell/sell.component';
 import { ResetPasswordComponent } from './modules/layout/reset-password/reset-password.component';
@@ -29,7 +30,8 @@ import { AdminModule } from './modules/admin/admin.module';
     ResetPasswordComponent,
     SellComponent,
     EditorImgComponent,
-    LoginComponent
+    LoginComponent,
+    SystemComponent
   ],
   imports: [
     BrowserModule,
