@@ -5,7 +5,7 @@ import { AccountService } from './../../../shared/service/account.service';
 import { PessoaService } from './../../../shared/service/pessoa.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-
+import {v4 as uuidv4} from 'uuid';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   form_validate: FormGroup;
 
   unauthorized = true;
+  uuidValidate = uuidv4();
 
   mensagens = {
     login: [
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     })
 
     this.form_validate = this.formBuilder.group({
-      codigo: ['']
+      codigo: [this.uuidValidate]
     })
   }
 
@@ -54,11 +55,13 @@ export class LoginComponent implements OnInit {
 
 
         setTimeout(() => {
-          // this.router.navigate(['system'])
           this.confirmationService.confirm({
             accept: () => {
-              console.log(this.form_validate.value);
-
+              if(this.form_validate.value.codigo == this.uuidValidate){
+                setTimeout(() => {
+                  this.router.navigate(['system'])
+                }, 500);
+            }
           }
           });
         }, 150);
