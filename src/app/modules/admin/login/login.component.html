@@ -1,0 +1,51 @@
+<div class="flex justify-content-center img">
+  <p-image src="assets/admin-logo.png" alt="Image" width="150"></p-image>
+</div>
+<div class="flex justify-content-center flex-wrap card-container yellow-container">
+  <form [formGroup]="form_login">
+    <p-card>
+      <div class="col-12">
+        <input type="text" formControlName="email" pInputText placeholder="Login" />
+        <div *ngFor="let erro of mensagens['email']">
+          <span class="msg-error"
+            *ngIf="form_login.get('email')?.hasError(erro.tipo) && (form_login.get('email')?.dirty || form_login.get('email')?.touched)">
+            {{erro.mensagem}}
+          </span>
+        </div>
+      </div>
+      <div class="col-12">
+        <input type="password" pInputText formControlName="senha" placeholder="Senha" />
+        <div *ngFor="let erro of mensagens['senha']">
+          <span class="msg-error"
+            *ngIf="form_login.get('senha')?.hasError(erro.tipo) && (form_login.get('senha')?.dirty || form_login.get('senha')?.touched)">
+            {{erro.mensagem}}
+          </span>
+        </div>
+      </div>
+      <div class="col-12">
+        <button pButton (click)="login()" pRipple type="button" label="Login"
+          class="p-button-rounded btn-login"></button>
+      </div>
+      <div class="col-12" *ngIf="!unauthorized">
+        <div class="unauthorized">
+          <h3> <i class="pi pi-shield"></i> Não autorizado!</h3>
+        </div>
+      </div>
+
+      <p-confirmDialog #cd [style]="{width: '50vw'}">
+
+        <ng-template pTemplate="header">
+          <form [formGroup]="form_validate">
+            <h4>Digite o código que chegou em seu email!</h4>
+            <input type="text" pInputText formControlName="codigo" placeholder="Código" />
+            <button type="button" class="btn-validate" pButton icon="pi pi-check" label="Validar" (click)="cd.accept()"></button>
+          </form>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <!-- <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button> -->
+        </ng-template>
+      </p-confirmDialog>
+    </p-card>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+p-image {
+  margin-top: 3em;
+}
+
+.window-form {
+  width: 250px;
+  height: 100px;
+  background-color: red;
+}
+
+input {
+  width: 100%;
+}
+
+.btn-login {
+  width: 100%;
+}
+
+.img {
+  margin-top: 10em;
+}
+
+.msg-error {
+  font-size: 15px;
+  color: red;
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.unauthorized {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(107, 104, 104);
+  border-radius: 5px;
+  margin: 0;
+
+  h3 {
+    margin: 0;
+    text-align: center;
+    position: relative;
+    top: 0.5em;
+    color: white;
+  }
+}
+
+.btn-validate {
+  margin-top: 1em;
+}

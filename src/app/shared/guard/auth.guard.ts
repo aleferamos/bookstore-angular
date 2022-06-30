@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
   }
 
-  async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  async canActivate(): Promise<boolean> {
 
     let token:IToken = {} as IToken;
 

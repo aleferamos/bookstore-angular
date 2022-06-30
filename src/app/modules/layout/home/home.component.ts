@@ -24,8 +24,6 @@ export class HomeComponent implements OnInit {
 
   async loadAnuncios() {
     const anuncio = this.anuncioService.getAllAnuncios('');
-
-
     anuncio.then(success => {
       this.anuncios = success!.content;
     })

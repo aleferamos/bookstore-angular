@@ -1,3 +1,4 @@
+import { LoginComponent } from './modules/admin/login/login.component';
 import { SellComponent } from './modules/layout/sell/sell.component';
 import { ResetPasswordComponent } from './modules/layout/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './modules/layout/forgot-password/forgot-password.component';
@@ -17,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptorService } from './shared/service/Spinner_request/spinner-interceptor.service';
 import { EditorImgComponent } from './components/editor-img/editor-img.component';
+import { AdminModule } from './modules/admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { EditorImgComponent } from './components/editor-img/editor-img.component
     ForgotPasswordComponent,
     ResetPasswordComponent,
     SellComponent,
-    EditorImgComponent
+    EditorImgComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,10 @@ import { EditorImgComponent } from './components/editor-img/editor-img.component
     LayoutModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AdminModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
