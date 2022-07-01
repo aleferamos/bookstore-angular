@@ -17,6 +17,11 @@ export class AnuncioService {
       return await this.http.get<IPage<IAnuncioList>>(url, {params: new HttpParams().set('nome', params! ? params : '')}).toPromise();
   }
 
+  async getAllByStatusCREATED(){
+    var url = `${environment.api}/anuncio/listar/CREATED`
+      return await this.http.get<IPage<IAnuncioList>>(url, {headers: {Authorization: 'Bearer ' + window.localStorage.getItem('token')}}).toPromise();
+  }
+
   async save(file: File, json: string){
 
 

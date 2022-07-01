@@ -1,3 +1,4 @@
+import { AnuncioService } from './../../../shared/service/anuncio.service';
 import { IAnuncioList } from './../../../shared/interface/anuncio';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,29 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class SystemComponent implements OnInit {
 
   anuncioList: IAnuncioList[] = []
-  object: objeto[] = [];
+  anuncioSelected: IAnuncioList = {} as IAnuncioList;
+  imageLink: string;
+  object: any[] = [];
 
   objectSelected;
 
   displayBasic2: boolean = false;
 
-  constructor() {
-    this.anuncioList = [
-      {descricao: 'vendo livro novo',
-        nomeImagem: '304e59a0-84ab-4e05-b27b-a106554e2f36',
-        data: '07/08/1997',
-        dataModificacao: '30/06/2022',
-        preco: 50,
-        curtida: 50,
-        livro: {}},
-        {descricao: 'vendo livro novo',
-        nomeImagem: '304e59a0-84ab-4e05-b27b-a106554e2f36',
-        data: '07/08/1997',
-        dataModificacao: '30/06/2022',
-        preco: 50,
-        curtida: 50,
-        livro: {}}
-    ];
+  constructor(
+    anuncioService: AnuncioService
+  ) {
+
+    anuncioService.getAllByStatusCREATED().then(success => {
+      this.anuncioList = success!.content!;
+    });
 
     this.object = [
       {status: 'Autorizar'},
@@ -42,15 +35,15 @@ export class SystemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showBasicDialog2() {
+  showBasicDialog2(anuncio: IAnuncioList) {
+    this.anuncioSelected = anuncio;
+
+    this.imageLink = `assets/images_posts/${this.anuncioSelected.nomeImagem}`
+
     this.displayBasic2 = true;
   }
 
   alterarStatus(){
     this.displayBasic2 = false;
   }
-}
-
-export class objeto {
-  status: string;
 }
