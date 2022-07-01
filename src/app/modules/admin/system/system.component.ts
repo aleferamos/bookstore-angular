@@ -1,3 +1,4 @@
+import { IAnuncioList } from './../../../shared/interface/anuncio';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,27 +8,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SystemComponent implements OnInit {
 
-  files1:Carro[] = [];
+  anuncioList: IAnuncioList[] = []
+  object: objeto[] = [];
 
-    files2: [];
+  objectSelected;
 
-    cols: any[];
+  displayBasic2: boolean = true;
 
   constructor() {
-    this.files1 = [
-      {nome:'civic', marca:'honda', modelo:'G2'},
-      {nome:'civic', marca:'honda', modelo:'G3'},
-      {nome:'civic', marca:'honda', modelo:'G4'},
+    this.anuncioList = [
+      {descricao: 'vendo livro novo',
+        nomeImagem: '304e59a0-84ab-4e05-b27b-a106554e2f36',
+        data: '07/08/1997',
+        dataModificacao: '30/06/2022',
+        preco: 50,
+        curtida: 50,
+        livro: {}},
+        {descricao: 'vendo livro novo',
+        nomeImagem: '304e59a0-84ab-4e05-b27b-a106554e2f36',
+        data: '07/08/1997',
+        dataModificacao: '30/06/2022',
+        preco: 50,
+        curtida: 50,
+        livro: {}}
+    ];
+
+    this.object = [
+      {status: 'Autorizar'},
+      {status: 'Não autorizar'},
     ]
   }
 
   ngOnInit(): void {
   }
 
+  showBasicDialog2() {
+    this.displayBasic2 = true;
+  }
 
+  alterarStatus(){
+    this.displayBasic2 = false;
+  }
 }
-export interface Carro {
-  nome: string;
-  marca: string;
-  modelo: string;
+
+export class objeto {
+  status: string;
 }

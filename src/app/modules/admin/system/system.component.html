@@ -19,27 +19,86 @@
               <span>Para analisar</span>
             </ng-template>
 
-            <h5>Basic</h5>
-            <!-- <p-treeTable [value]="files1">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Name</th>
-                  <th>Size</th>
-                  <th>Type</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-                <tr [ttRow]="rowNode">
-                  <td>
-                    <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                    {{rowData.name}}
-                  </td>
-                  <td>{{rowData.size}}</td>
-                  <td>{{rowData.type}}</td>
-                </tr>
-              </ng-template>
-            </p-treeTable> -->
+            <div *ngFor="let announce of anuncioList">
+              <div class="announce" (click)="showBasicDialog2()">
+                <div class="grid" style="margin-top: 0.2em;">
+                  <div class="col-1">
+                    <i class="pi pi-tags"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h3 style="margin: 0; margin-left: 1em;">1</h3>
+                  </div>
+                  <div class="col-1">
+                    <i class="pi pi-calendar-plus"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">07/08/1997</h4>
+                  </div>
+                  <div class="col-1">
+                    <i class="pi pi-thumbs-up"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">5</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-user"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">Alefe Patrick Dias Ramos</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-map-marker"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">Várzea grande</h4>
+                  </div>
+                  <div class="col-1">
+                    <h5 style="float: left; margin-top: 0.3em;">Cep: </h5>
+                    <h4 style="margin: 0; margin-left: 2.5em; margin-top: 0.2em;">78143312</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-pencil"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">30/06/2022</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-check-circle"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">Criado</h4>
+                  </div>
+                </div>
+              </div>
+              <p-dialog header="1" [modal]="true" [(visible)]="displayBasic2" [style]="{width: '100vw', height:'100%'}">
+                <div class="grid">
+                  <div class="col-6">
+                    <h3>Titulo: Os segredos da mente milhonária</h3>
+                    <h4>Descrição:</h4>
+                    <textarea [rows]="10" [cols]="100" placeholder="Descrição" pInputTextarea></textarea>
+                    <h4>Valor: 25.00</h4>
+                    <h4>Data de criação: 30/06/2022</h4>
+                    <h4>Número de páginas: 100</h4>
+                    <h4>Código de barras: 7896181928584</h4>
 
+                    <hr>
+                    <h3>Barra de ações</h3>
+                    <p-cascadeSelect [(ngModel)]="objectSelected" [options]="object" optionLabel="status"
+                      optionGroupLabel="name" placeholder="Status" [optionGroupChildren]="['object']"
+                      [style]="{'minWidth': '14rem'}"></p-cascadeSelect><br><br>
+
+                      <button pButton (click)="alterarStatus()" pRipple type="button" label="Alterar status" class="p-button-outlined"></button>
+
+                  </div>
+                  <div class="col-6">
+                    <div class="flex justify-content-center flex-wrap card-container yellow-container">
+                      <p-image src="assets/images_posts/304e59a0-84ab-4e05-b27b-a106554e2f36.jpeg" [preview]="true"
+                        alt="Image" width="430">
+                        <ng-template pTemplate="indicator">
+                          <i class="pi pi-eye"></i>
+                        </ng-template>
+                      </p-image>
+                    </div>
+
+                  </div>
+                </div>
+
+              </p-dialog>
+              <br>
+            </div>
           </p-tabPanel>
 
           <p-tabPanel header="Header III">

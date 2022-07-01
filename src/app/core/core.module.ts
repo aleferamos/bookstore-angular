@@ -25,7 +25,7 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TabViewModule} from 'primeng/tabview';
 import {SplitterModule} from 'primeng/splitter';
-// import {TreeTableModule} from 'primeng/treetable';
+import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 @NgModule({
   declarations: [],
@@ -57,7 +57,8 @@ import {SplitterModule} from 'primeng/splitter';
     AngularCropperjsModule,
     ConfirmDialogModule,
     TabViewModule,
-    SplitterModule
+    SplitterModule,
+    CascadeSelectModule
   ]
 })
 export class CoreModule { }
