@@ -13,7 +13,7 @@ export class SystemComponent implements OnInit {
 
   objectSelected;
 
-  displayBasic2: boolean = true;
+  displayBasic2: boolean = false;
 
   constructor() {
     this.anuncioList = [
