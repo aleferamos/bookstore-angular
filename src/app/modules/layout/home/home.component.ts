@@ -23,8 +23,10 @@ export class HomeComponent implements OnInit {
   }
 
   async loadAnuncios() {
-    const anuncio = this.anuncioService.getAllAnuncios('');
+    const anuncio = this.anuncioService.getAllByStatus('AUTHORIZED');
     anuncio.then(success => {
+      console.log(success);
+
       this.anuncios = success!.content;
     })
   }

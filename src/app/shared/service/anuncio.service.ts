@@ -17,7 +17,7 @@ export class AnuncioService {
       return await this.http.get<IPage<IAnuncioList>>(url, {params: new HttpParams().set('nome', params! ? params : '')}).toPromise();
   }
 
-  async getAllByStatusCREATED(status: string){
+  async getAllByStatus(status: string){
     var url = `${environment.api}/anuncio/listarByStatus`
       return await this.http.get<IPage<IAnuncioList>>(url, {headers: {Authorization: 'Bearer ' + window.localStorage.getItem('token')},
       params: new HttpParams().set('status', status)}).toPromise();

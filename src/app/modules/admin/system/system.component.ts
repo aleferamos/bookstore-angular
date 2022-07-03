@@ -39,13 +39,13 @@ export class SystemComponent implements OnInit {
   }
 
   loadAnunciosCreated(){
-    this.anuncioService.getAllByStatusCREATED('CREATED').then(success => {
+    this.anuncioService.getAllByStatus('CREATED').then(success => {
       this.anuncioListCreated = success!.content!;
     });
   }
 
   loadAnunciosUnauthorized(){
-    this.anuncioService.getAllByStatusCREATED('UNAUTHORIZED').then(success => {
+    this.anuncioService.getAllByStatus('UNAUTHORIZED').then(success => {
       this.anuncioListUnauthorized = success!.content!;
     });
   }
