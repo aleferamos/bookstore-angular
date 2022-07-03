@@ -1,15 +1,18 @@
 import { AnuncioService } from './../../../shared/service/anuncio.service';
 import { IAnuncioList } from './../../../shared/interface/anuncio';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-system',
   templateUrl: './system.component.html',
-  styleUrls: ['./system.component.scss']
+  styleUrls: ['./system.component.scss'],
+  providers: [MessageService]
 })
 export class SystemComponent implements OnInit {
 
-  anuncioList: IAnuncioList[] = []
+  anuncioListCreated: IAnuncioList[] = [];
+  anuncioListUnauthorized: IAnuncioList[] = [];
   anuncioSelected: IAnuncioList = {} as IAnuncioList;
   imageLink: string;
   object: any[] = [];
@@ -19,20 +22,32 @@ export class SystemComponent implements OnInit {
   displayBasic2: boolean = false;
 
   constructor(
-    anuncioService: AnuncioService
+    private anuncioService: AnuncioService,
+    private messageService: MessageService
   ) {
 
-    anuncioService.getAllByStatusCREATED().then(success => {
-      this.anuncioList = success!.content!;
-    });
+    this.loadAnunciosCreated();
+    this.loadAnunciosUnauthorized();
 
     this.object = [
-      {status: 'Autorizar'},
-      {status: 'Não autorizar'},
+      {status: 'Autorizar', value: '1'},
+      {status: 'Não autorizar', value: '2'},
     ]
   }
 
   ngOnInit(): void {
+  }
+
+  loadAnunciosCreated(){
+    this.anuncioService.getAllByStatusCREATED('CREATED').then(success => {
+      this.anuncioListCreated = success!.content!;
+    });
+  }
+
+  loadAnunciosUnauthorized(){
+    this.anuncioService.getAllByStatusCREATED('UNAUTHORIZED').then(success => {
+      this.anuncioListUnauthorized = success!.content!;
+    });
   }
 
   showBasicDialog2(anuncio: IAnuncioList) {
@@ -43,7 +58,16 @@ export class SystemComponent implements OnInit {
     this.displayBasic2 = true;
   }
 
-  alterarStatus(){
-    this.displayBasic2 = false;
+  alterarStatus(event){
+    this.anuncioService.changeStatus(event.id, this.objectSelected).then(success => {
+      this.displayBasic2 = false;
+      setTimeout(() => {
+        this.loadAnunciosCreated();
+        this.loadAnunciosUnauthorized();
+      }, 400);
+    }).catch(error => {
+      this.messageService.add({severity:'error', summary:'Status', detail:'Você deve escolher um status!'});
+    })
+
   }
 }

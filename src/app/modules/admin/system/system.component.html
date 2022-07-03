@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="background">
   <div class="header">
     <div class="grid">
@@ -18,8 +19,8 @@
               <i class="pi pi-eye icon"></i>
               <span>Para analisar</span>
             </ng-template>
-
-            <div *ngFor="let announce of anuncioList">
+            <p *ngIf="anuncioListCreated.length < 1">Não existe anuncios criados no momento.</p>
+            <div *ngFor="let announce of anuncioListCreated">
               <div class="announce" (click)="showBasicDialog2(announce)">
                 <div class="grid" style="margin-top: 0.2em;">
                   <div class="col-1">
@@ -76,11 +77,11 @@
 
                     <hr>
                     <h3>Barra de ações</h3>
-                    <p-cascadeSelect [(ngModel)]="objectSelected" [options]="object" optionLabel="status"
+                    <p-cascadeSelect [(ngModel)]="objectSelected" optionValue="value" [options]="object" optionLabel="status"
                       optionGroupLabel="name" placeholder="Status" [optionGroupChildren]="['object']"
                       [style]="{'minWidth': '14rem'}"></p-cascadeSelect><br><br>
 
-                      <button pButton (click)="alterarStatus()" pRipple type="button" label="Alterar status" class="p-button-outlined"></button>
+                      <button pButton (click)="alterarStatus(anuncioSelected)" pRipple type="button" label="Alterar status" class="p-button-outlined"></button>
 
                   </div>
                   <div class="col-6">
@@ -101,16 +102,93 @@
             </div>
           </p-tabPanel>
 
-          <p-tabPanel header="Header III">
+          <p-tabPanel>
             <ng-template pTemplate="header">
-              <i class="pi pi-times icon"></i>
+              <i class="pi pi-eye icon"></i>
               <span>Não autorizados</span>
             </ng-template>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-              atque corrupti quos dolores et quas molestias excepturi sint occaecati
-              cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
-              dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-              Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+
+            <p *ngIf="anuncioListUnauthorized.length < 1">Não existe anuncios não autorizados no momento.</p>
+            <div *ngFor="let announce of anuncioListUnauthorized">
+              <div class="announce" (click)="showBasicDialog2(announce)">
+                <div class="grid" style="margin-top: 0.2em;">
+                  <div class="col-1">
+                    <i class="pi pi-tags"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h3 style="margin: 0; margin-left: 1em;">{{announce.id}}</h3>
+                  </div>
+                  <div class="col-1">
+                    <i class="pi pi-calendar-plus"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.data}}</h4>
+                  </div>
+                  <div class="col-1">
+                    <i class="pi pi-thumbs-up"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.curtida}}</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-user"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.pessoa?.nome}}</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-map-marker"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.pessoa?.endereco?.cidade}}</h4>
+                  </div>
+                  <div class="col-1">
+                    <h5 style="float: left; margin-top: 0.3em;">Cep: </h5>
+                    <h4 style="margin: 0; margin-left: 2.5em; margin-top: 0.2em;">{{announce.pessoa?.endereco?.cep}}</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-pencil"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em;"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.dataModificacao ? announce.dataModificacao : 'Não modificado'}}</h4>
+                  </div>
+                  <div class="col-2">
+                    <i class="pi pi-times-circle"
+                      style="float: left; margin-left: 1em; margin-right: 1em; margin-top: 0.2em; color: rgb(255, 0, 0);"></i>
+                    <h4 style="margin: 0; margin-left: 1em; margin-top: 0.2em;">{{announce.status == 'UNAUTHORIZED' ? 'Não autorizado' : this}}</h4>
+                  </div>
+                </div>
+              </div>
+              <p-dialog header="{{anuncioSelected.id}}" [modal]="true" [(visible)]="displayBasic2" [style]="{width: '100vw', height:'100%'}">
+                <div class="grid">
+                  <div class="col-6">
+                    <h3>Titulo: {{anuncioSelected.livro?.titulo}}</h3>
+                    <h4>Descrição: </h4>
+                    <textarea [rows]="10" [cols]="100" placeholder="Descrica" [value]="anuncioSelected.descricao" pInputTextarea></textarea>
+                    <h4>Valor: {{anuncioSelected.preco}},00</h4>
+                    <h4>Data de criação: {{anuncioSelected.data}}</h4>
+                    <h4>Número de páginas: {{anuncioSelected.livro?.numeroPaginas}}</h4>
+                    <h4>Código de barras: {{anuncioSelected.livro?.produto?.codigoBarra}}</h4>
+
+                    <hr>
+                    <h3>Barra de ações</h3>
+                    <p-cascadeSelect [(ngModel)]="objectSelected" optionValue="value" [options]="object" optionLabel="status"
+                      optionGroupLabel="name" placeholder="Status" [optionGroupChildren]="['object']"
+                      [style]="{'minWidth': '14rem'}"></p-cascadeSelect><br><br>
+
+                      <button pButton (click)="alterarStatus(anuncioSelected)" pRipple type="button" label="Alterar status" class="p-button-outlined"></button>
+
+                  </div>
+                  <div class="col-6">
+                    <div class="flex justify-content-center flex-wrap card-container yellow-container">
+                      <p-image src="{{imageLink}}" [preview]="true"
+                        alt="Image" width="430">
+                        <ng-template pTemplate="indicator">
+                          <i class="pi pi-eye"></i>
+                        </ng-template>
+                      </p-image>
+                    </div>
+
+                  </div>
+                </div>
+
+              </p-dialog>
+              <br>
+            </div>
           </p-tabPanel>
         </p-tabView>
       </p-tabPanel>
