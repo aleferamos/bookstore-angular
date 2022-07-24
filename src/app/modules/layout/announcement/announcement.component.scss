@@ -1,0 +1,61 @@
+.content {
+  height: 100vh;
+  background-color: rgb(230, 230, 230);
+  padding: 25px;
+
+  ::ng-deep .p-card {
+    border-radius: 5px;
+
+    ::ng-deep .p-image-preview-container {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    h2,
+    h3,
+    h4 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    p {
+      font-size: 13px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .p-button {
+      border-radius: 5px;
+    }
+  }
+
+  hr {
+    width: 100px;
+  }
+
+  .rating-and-comments {
+    padding-left: 2%;
+
+    .comment {
+      border: solid 2px rgba(0, 0, 0, 0.171);
+      margin-top: 1em;
+      border-radius: 5px;
+      padding: 5px;
+
+      i {
+        position: absolute;
+        margin-top: -0.8em;
+        color: rgb(255, 251, 0);
+      }
+
+      .rating {
+        position: relative;
+        margin-top: -0.9em;
+        left: 2em;
+        background-color: white;
+        width: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+  }
+}

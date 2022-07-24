@@ -16,7 +16,7 @@
                 <h4 class="p-mb-1">{{anuncio.livro.titulo}}</h4>
                 <h3 class="p-mt-0 p-mb-3">R$ {{anuncio.preco}},00</h3>
 
-                <button pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
+                <button (click)="ViewAnnouncement(anuncio)" pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
                   Anuncio</button>
 
                 <div class="car-buttons p-mt-5">
@@ -51,7 +51,7 @@
                 <h4 class="p-mb-1">{{anuncio.livro.titulo}}</h4>
                 <h3 class="p-mt-0 p-mb-3">R$ {{anuncio.preco}}</h3>
 
-                <button pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
+                <button (click)="ViewAnnouncement(anuncio)" pButton type="button" class="p-button-raised p-button-rounded" style="margin-bottom: 1em;">Ver
                   Anuncio</button>
 
                 <div class="car-buttons p-mt-5">

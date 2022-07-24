@@ -52,9 +52,7 @@ export class SystemComponent implements OnInit {
 
   showBasicDialog2(anuncio: IAnuncioList) {
     this.anuncioSelected = anuncio;
-
     this.imageLink = `assets/images_posts/${this.anuncioSelected.nomeImagem}`
-
     this.displayBasic2 = true;
   }
 
@@ -65,7 +63,7 @@ export class SystemComponent implements OnInit {
         this.loadAnunciosCreated();
         this.loadAnunciosUnauthorized();
       }, 400);
-    }).catch(error => {
+    }).catch(() => {
       this.messageService.add({severity:'error', summary:'Status', detail:'Você deve escolher um status!'});
     })
 

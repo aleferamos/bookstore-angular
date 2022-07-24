@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
       const result = await lastValueFrom(this.pessoaService.getUserAuthenticad(window.localStorage.getItem('token')!));
       if(result.usuario.perfil == "ANALYST_PUB"){
         this.unauthorized = true;
-
-
         setTimeout(() => {
           this.confirmationService.confirm({
             accept: () => {

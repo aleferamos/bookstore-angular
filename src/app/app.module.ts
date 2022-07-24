@@ -1,3 +1,4 @@
+import { AnnouncementComponent } from './modules/layout/announcement/announcement.component';
 import { SystemComponent } from './modules/admin/system/system.component';
 import { LoginComponent } from './modules/admin/login/login.component';
 import { SellComponent } from './modules/layout/sell/sell.component';
@@ -20,6 +21,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptorService } from './shared/service/Spinner_request/spinner-interceptor.service';
 import { EditorImgComponent } from './components/editor-img/editor-img.component';
 import { AdminModule } from './modules/admin/admin.module';
+import { RippleModule } from 'primeng/ripple';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { AdminModule } from './modules/admin/admin.module';
     SellComponent,
     EditorImgComponent,
     LoginComponent,
-    SystemComponent
+    SystemComponent,
+    AnnouncementComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { AdminModule } from './modules/admin/admin.module';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AdminModule
+    AdminModule,
+    RippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,11 @@ export class AnuncioService {
       return await this.http.get<IPage<IAnuncioList>>(url, {params: new HttpParams().set('nome', params! ? params : '')}).toPromise();
   }
 
+  async findById(id: number){
+    var url = `${environment.api}/anuncio/buscarPorId/${id}`
+      return await this.http.get<IAnuncioList>(url).toPromise();
+  }
+
   async getAllByStatus(status: string){
     var url = `${environment.api}/anuncio/listarByStatus`
       return await this.http.get<IPage<IAnuncioList>>(url, {headers: {Authorization: 'Bearer ' + window.localStorage.getItem('token')},

@@ -26,6 +26,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TabViewModule} from 'primeng/tabview';
 import {SplitterModule} from 'primeng/splitter';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
+import {SidebarModule} from 'primeng/sidebar';
 
 @NgModule({
   declarations: [],
@@ -58,7 +59,8 @@ import {CascadeSelectModule} from 'primeng/cascadeselect';
     ConfirmDialogModule,
     TabViewModule,
     SplitterModule,
-    CascadeSelectModule
+    CascadeSelectModule,
+    SidebarModule
   ]
 })
 export class CoreModule { }

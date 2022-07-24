@@ -1,3 +1,4 @@
+import { AnnouncementComponent } from './announcement/announcement.component';
 import { SellComponent } from './sell/sell.component';
 import { AuthGuard } from './../../shared/guard/auth.guard';
 import { ProtectedRout } from './../../shared/guard/protectedRout.guard';
@@ -16,6 +17,7 @@ const routes: Routes = [
       {path: 'reset_password/:token', canActivate: [ProtectedRout], component: ResetPasswordComponent},
       {path: 'reset_password', pathMatch: 'full', redirectTo:'home'},
       {path: 'sell', canActivate: [AuthGuard], component: SellComponent},
+      {path: 'announcement/:id', canActivate: [AuthGuard], component: AnnouncementComponent},
     ]
 },
 ];

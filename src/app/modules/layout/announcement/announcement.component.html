@@ -1,0 +1,40 @@
+<div class="content">
+  <p-card>
+    <div class="grid">
+      <div class="col-6">
+        <div class="flex justify-content-center flex-wrap card-container yellow-container">
+          <p-image src="{{imageAnnouncement}}" alt="Image" width="350" [preview]="true">
+          </p-image>
+        </div>
+      </div>
+      <div class="col-6">
+        <h2>{{announcement.livro?.titulo}}</h2>
+        <h4>R$ {{announcement.preco}},00</h4>
+        <h3>O que você precisa saber sobre este produto</h3>
+        <p>Autor - {{announcement.livro?.autor}}</p>
+        <p>Edição {{announcement.livro?.edicao}}</p>
+        <p>Número de paginas {{announcement.livro?.numeroPaginas}}</p>
+        <p>Ano de publicação {{announcement.livro?.anoPublicacao}}</p>
+        <p>Codigo de barras - {{announcement.livro?.produto?.codigoBarra}}</p>
+        <br>
+        <button pButton pRipple type="button" (click)="purchaseBooks(announcement)" label="Comprar agora"></button>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div class="grid">
+      <div class="col-6">
+        <div class="rating-and-comments">
+          <h2 class="title-section-rating-and-comments">Avaliações e comentários</h2>
+          <div class="comment" *ngFor="let comment of comments">
+            <i class="pi pi-star-fill" style="font-size: 1.5em"></i>
+            <p class="rating">{{comment.rating}}.0</p>
+            <p>{{comment.author}}</p>
+            <p>{{comment.comment}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
+
