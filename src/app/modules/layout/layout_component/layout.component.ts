@@ -144,15 +144,6 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  addCart(book: IAnuncioList) {
-      if (this.cart.includes(book)) {
-        this.cart.push(book!);
-      this.subtotal += 0;
-    } else {
-      this.subtotal += book!.preco;
-    }
-  }
-
   showModalCreateAccount() {
     this.displayModal = true;
   }
