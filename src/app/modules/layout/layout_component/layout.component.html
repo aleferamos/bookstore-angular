@@ -1,4 +1,4 @@
-<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="top-center"></p-toast>
 
 
 <div class="background">
@@ -173,7 +173,7 @@
                 <p style="font-size: 13px;">Subtotal - R$ {{subtotal}},00</p>
               </div>
               <div class="col-4">
-                <button pButton pRipple type="button" label="Finalizar"
+                <button *ngIf="cart.length > 0" (click)="redirectToPayment()" pButton pRipple type="button" label="Finalizar"
                   class="p-button-rounded p-button-success"></button>
               </div>
             </div>

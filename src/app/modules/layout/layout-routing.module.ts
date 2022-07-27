@@ -1,13 +1,14 @@
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { SellComponent } from './sell/sell.component';
 import { AuthGuard } from './../../shared/guard/auth.guard';
-import { ProtectedRout } from './../../shared/guard/protectedRout.guard';
+import { ProtectedPaymentPage, ProtectedRout } from './../../shared/guard/protectedRout.guard';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout_component/layout.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   {path: '', component: LayoutComponent,
@@ -17,7 +18,8 @@ const routes: Routes = [
       {path: 'reset_password/:token', canActivate: [ProtectedRout], component: ResetPasswordComponent},
       {path: 'reset_password', pathMatch: 'full', redirectTo:'home'},
       {path: 'sell', canActivate: [AuthGuard], component: SellComponent},
-      {path: 'announcement/:id', canActivate: [AuthGuard], component: AnnouncementComponent},
+      {path: 'announcement/:id', component: AnnouncementComponent},
+      {path: 'payment', canActivate: [AuthGuard, ProtectedPaymentPage], component: PaymentComponent},
     ]
 },
 ];

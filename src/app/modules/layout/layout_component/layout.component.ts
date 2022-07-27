@@ -70,10 +70,10 @@ export class LayoutComponent implements OnInit {
     private pessoaService: PessoaService,
     private googleBookService: googleBookService,
     private route:Router,
-    private messageService: MessageService
+    private messageService: MessageService,
     ) {
 
-      this.subscription = this.transferLivroService.livros$.subscribe(book => {this.addCart(book);})
+
 
       this.form_pessoa = this.formBuilder.group({
         nome: [''],
@@ -102,7 +102,16 @@ export class LayoutComponent implements OnInit {
       this.isAuthenticad();
     }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.transferLivroService.currentMessageSubTotal.subscribe(preco => {
+      this.subtotal = preco
+
+    })
+
+    this.transferLivroService.currentMessageCart.subscribe(books => {
+      this.cart = books;
+    })
+  }
 
   async isAuthenticad(){
     let token: IToken = {} as IToken;
@@ -136,12 +145,11 @@ export class LayoutComponent implements OnInit {
   }
 
   addCart(book: IAnuncioList) {
-
-    if (this.cart.includes(book)) {
+      if (this.cart.includes(book)) {
+        this.cart.push(book!);
       this.subtotal += 0;
     } else {
-      this.subtotal += book.preco;
-      this.cart.push(book);
+      this.subtotal += book!.preco;
     }
   }
 
@@ -220,6 +228,16 @@ export class LayoutComponent implements OnInit {
     }, 200);
   }
 
+  redirectToPayment(){
+    if(localStorage.getItem("token")){
+      setTimeout(() => {
+        this.route.navigate(['payment']);
+      }, 200);
+    } else {
+      this.messageService.add({severity:'error', summary: 'Ops...', detail: 'Você precisa estar logado!'});
+    }
+  }
+
 
   sell(){
     if(localStorage.getItem("token")){
@@ -227,7 +245,7 @@ export class LayoutComponent implements OnInit {
         this.route.navigate(["sell"]);
       }, 200);
     } else {
-      this.messageService.add({key: 'tc', severity:'error', summary: 'Ops...', detail: 'Você precisa estar logado!'});
+      this.messageService.add({severity:'error', summary: 'Ops...', detail: 'Você precisa estar logado!'});
     }
 
   }

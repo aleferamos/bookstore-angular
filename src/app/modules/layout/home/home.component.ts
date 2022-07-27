@@ -1,3 +1,4 @@
+import { LayoutComponent } from './../layout_component/layout.component';
 import { Router } from '@angular/router';
 import { AnuncioService } from './../../../shared/service/anuncio.service';
 import {TransferLivroService} from './../../../shared/service/Transfer_object/TransferLivro.service';
@@ -31,15 +32,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  addCart(book: IAnuncioList) {
-    this.transferLivroService.salvar(book);
+  addItemCart(book: IAnuncioList) {
+    this.transferLivroService.addBookToCart(book);
   }
 
   ViewAnnouncement(anuncio: IAnuncioList){
-
     setTimeout(() => {
       this.router.navigate([`announcement/${anuncio.id}`])
-    }, 300);
+    }, 100);
   }
 
 }

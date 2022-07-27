@@ -11,7 +11,7 @@ export class ViaCepService {
   constructor(private http: HttpClient){}
 
   search_cep(cep: string): Observable<IViaCep> {
-    return this.http.get<IViaCep>(`https://viacep.com.br/ws//${cep}/json/`).pipe(
+    return this.http.get<IViaCep>(`https://viacep.com.br/ws/${cep}/json/`).pipe(
       map(response => response)
     );
   }

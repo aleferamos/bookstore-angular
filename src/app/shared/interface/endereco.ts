@@ -15,4 +15,5 @@ export interface IEnderecoAuthenticad {
   numero: number;
   idade: string;
   estado: string;
+  cidade: string;
 }

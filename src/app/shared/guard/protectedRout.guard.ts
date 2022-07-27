@@ -1,9 +1,11 @@
+import { TransferLivroService } from 'src/app/shared/service/Transfer_object/TransferLivro.service';
 import { IToken } from './../interface/IToken';
 import { Injectable } from "@angular/core";
 import { ActivatedRoute, CanActivate, Router } from "@angular/router";
 import { lastValueFrom, Subscription } from "rxjs";
 import { AccountService } from '../service/account.service';
 import { ResetPasswordTokenService } from '../service/resetPasswordToken.service';
+import { IAnuncioList } from '../interface/anuncio';
 
 
 @Injectable({
@@ -27,6 +29,29 @@ export class ProtectedRout implements CanActivate {
     } else {
       this.router.navigate(['home']);
       return false;
+    }
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProtectedPaymentPage implements CanActivate {
+
+  announcement: IAnuncioList[] = [];
+
+  constructor(
+    private transferLivroService: TransferLivroService,
+    private router: Router) {
+      this.transferLivroService.currentMessageCart.subscribe(announcement => this.announcement = announcement)
+    }
+
+  async canActivate() {
+    if(this.announcement.length < 1){
+      this.router.navigate(['home']);
+      return false;
+    } else {
+      return true;
     }
   }
 }

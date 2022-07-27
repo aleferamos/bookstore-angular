@@ -22,6 +22,7 @@ import { SpinnerInterceptorService } from './shared/service/Spinner_request/spin
 import { EditorImgComponent } from './components/editor-img/editor-img.component';
 import { AdminModule } from './modules/admin/admin.module';
 import { RippleModule } from 'primeng/ripple';
+import { PaymentComponent } from './modules/layout/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RippleModule } from 'primeng/ripple';
     EditorImgComponent,
     LoginComponent,
     SystemComponent,
-    AnnouncementComponent
+    AnnouncementComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

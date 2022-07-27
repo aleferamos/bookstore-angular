@@ -1,0 +1,34 @@
+<div class="grid">
+  <div class="col-6">
+    <div class="content-address">
+      <h2>Endereço</h2>
+      <p>{{pessoaAuthenticad.endereco?.endereco}}</p>
+      <p>Número - {{pessoaAuthenticad.endereco?.numero}}</p>
+      <p>Cidade - {{pessoaAuthenticad.endereco?.cidade}}</p>
+      <p>Complemento - {{pessoaAuthenticad?.endereco?.complemento}}</p>
+      <p>Estado - {{pessoaAuthenticad.endereco?.estado}}</p>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="content-cart">
+      <h2>Carrinho</h2>
+      <div class="cart" *ngFor="let item of itensCart">
+        <div class="grid">
+          <div class="col-6">
+            <p>{{item.livro?.titulo}}</p>
+          </div>
+          <div class="col-2">
+            <p>R$ {{item.preco}}.00</p>
+          </div>
+          <div class="col-2">
+            <p-image src="assets/images_posts/{{item.nomeImagem}}" alt="Image" width="30" [preview]="true">
+            </p-image>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="final-text-cart">Sub-total: R$ {{subTotal}}.00</p>
+    <p class="final-text-cart">Frete: R$ 50.00</p>
+    <p class="final-text-cart">Total: R$ {{subTotal + 50}}.00</p>
+  </div>
+</div>
