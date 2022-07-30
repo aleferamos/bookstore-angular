@@ -17,16 +17,26 @@ export class TransferLivroService {
   currentMessageSubTotal = this.messageSourcesubTotal.asObservable();
   constructor() { }
 
-  addBookToCart(addAnnoncement:IAnuncioList){
-      if(!this.AnnouncementList.find(announcement => addAnnoncement.id == announcement.id)){
-        this.AnnouncementList.push(addAnnoncement);
-        this.calculateSubTotal(addAnnoncement);
+  addBookToCart(book:IAnuncioList){
+      if(!this.AnnouncementList.find(announcement => book.id == announcement.id)){
+        this.AnnouncementList.push(book);
+        this.subTotalFromCart += book.preco;
+        this.messageSourcesubTotal.next(this.subTotalFromCart);
       }
   }
 
-  calculateSubTotal(addAnnoncement:IAnuncioList){
-    this.subTotalFromCart += addAnnoncement.preco;
+  calculateSubTotal(book:IAnuncioList){
+    this.subTotalFromCart += book.preco;
     this.messageSourcesubTotal.next(this.subTotalFromCart);
+  }
+
+  removeBookFromCart(book:IAnuncioList){
+    this.AnnouncementList.splice(this.AnnouncementList.indexOf(book), 1)
+    this.subTotalFromCart -= book.preco;
+    this.messageSourcesubTotal.next(this.subTotalFromCart);
+    if(this.AnnouncementList.length < 1){
+      location.reload()
+    }
   }
 
 }

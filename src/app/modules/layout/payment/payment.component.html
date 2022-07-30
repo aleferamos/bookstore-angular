@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" *ngIf="HidePaymentWindow">
   <div class="col-6">
     <div class="content-address">
       <h2>Endereço</h2>
@@ -24,11 +24,22 @@
             <p-image src="assets/images_posts/{{item.nomeImagem}}" alt="Image" width="30" [preview]="true">
             </p-image>
           </div>
+          <div class="col-2">
+            <i class="pi pi-times icon-delete" (click)="deleteItemFromListBooks(item)" style="font-size: 1rem"></i>
+          </div>
         </div>
       </div>
     </div>
-    <p class="final-text-cart">Sub-total: R$ {{subTotal}}.00</p>
-    <p class="final-text-cart">Frete: R$ 50.00</p>
-    <p class="final-text-cart">Total: R$ {{subTotal + 50}}.00</p>
+    <div class="final-text-cart">
+      <p>Sub-total: R$ {{subTotal}}.00</p>
+      <p>Frete: R$ 50.00</p>
+      <p>Total: R$ {{subTotal + 50}}.00</p>
+    </div>
+    <button pButton pRipple type="button" (click)="finalizePayment()" label="Finalizar" class="p-button-outlined p-button-rounded p-button-success"></button>
   </div>
 </div>
+<div class="grid">
+  <p-progressSpinner class="spinner" *ngIf="loadingFinalizePayment"></p-progressSpinner>
+  <p-image src="assets/gif_paid-out.gif" *ngIf="paidWithSuccessAnimation" alt="Image" width="250"></p-image>
+</div>
+<h2 class="text-paid-with-success" *ngIf="paidWithSuccessAnimation">Operação realizada com sucesso.</h2>

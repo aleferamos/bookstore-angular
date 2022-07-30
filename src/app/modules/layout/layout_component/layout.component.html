@@ -55,6 +55,11 @@
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="nome" placeholder="Nome e sobrenome"
                     pInputText />
+                    <ng-container *ngFor="let erro of mensagens['nome']">
+                      <span class="msg-error" *ngIf="form_pessoa.get('nome')!.hasError(erro.tipo) && (form_pessoa.get('nome')!.dirty || form_pessoa.get('nome')!.touched)">
+                        {{erro.mensagem}}
+                      </span>
+                    </ng-container>
                 </div>
               </div>
             </form>
@@ -63,24 +68,20 @@
               <div class="grid">
                 <div class="col-4">
                   <input type="email" style="width: 100%;" formControlName="email" placeholder="E-mail" pInputText />
+                  <ng-container *ngFor="let erro of mensagens['email']">
+                    <span class="msg-error" *ngIf="form_usuario.get('email')!.hasError(erro.tipo) && (form_usuario.get('email')!.dirty || form_usuario.get('email')!.touched)">
+                      {{erro.mensagem}}
+                    </span>
+                  </ng-container>
                 </div>
+
                 <div class="col-4">
-                  <!-- <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText /> -->
-                  <p-password weakLabel="Fraca" mediumLabel="Média" placeholder="Senha" formControlName="senha" strongLabel="Forte" promptLabel="Entre com a senha">
-                    <ng-template pTemplate="header">
-                        <h6>Digite a senha</h6>
-                    </ng-template>
-                    <ng-template pTemplate="footer">
-                        <p-divider></p-divider>
-                        <p class="mt-2">Sugestão</p>
-                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                            <li>Pelo menos uma letra minúscula</li>
-                            <li>Pelo menos uma letra maiúscula</li>
-                            <li>Pelo menos um número</li>
-                            <li>minimo 8 caracteres</li>
-                        </ul>
-                    </ng-template>
-                </p-password>
+                  <input type="password" style="width: 100%;" formControlName="senha" placeholder="Senha" pInputText />
+                <ng-container *ngFor="let erro of mensagens['senha']">
+                  <span class="msg-error" *ngIf="form_usuario.get('senha')!.hasError(erro.tipo) && (form_usuario.get('senha')!.dirty || form_usuario.get('senha')!.touched)">
+                    {{erro.mensagem}}
+                  </span>
+                </ng-container>
                 </div>
               </div>
             </form>
@@ -106,19 +107,44 @@
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="endereco" placeholder="Endereco"
                     pInputText />
+                    <ng-container *ngFor="let erro of mensagens['endereco']">
+                      <span class="msg-error" *ngIf="form_endereco.get('endereco')!.hasError(erro.tipo) && (form_endereco.get('endereco')!.dirty || form_endereco.get('endereco')!.touched)">
+                        {{erro.mensagem}}
+                      </span>
+                    </ng-container>
                 </div>
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="complemento" placeholder="Complemento"
                     pInputText />
+                    <ng-container *ngFor="let erro of mensagens['complemento']">
+                      <span class="msg-error" *ngIf="form_endereco.get('complemento')!.hasError(erro.tipo) && (form_endereco.get('complemento')!.dirty || form_endereco.get('complemento')!.touched)">
+                        {{erro.mensagem}}
+                      </span>
+                    </ng-container>
                 </div>
                 <div class="col-4">
                   <input type="text" style="width: 100%;" formControlName="cidade" placeholder="Cidade" pInputText />
+                  <ng-container *ngFor="let erro of mensagens['cidade']">
+                    <span class="msg-error" *ngIf="form_endereco.get('cidade')!.hasError(erro.tipo) && (form_endereco.get('cidade')!.dirty || form_endereco.get('cidade')!.touched)">
+                      {{erro.mensagem}}
+                    </span>
+                  </ng-container>
                 </div>
                 <div class="col-2">
                   <input type="text" style="width: 100%;" formControlName="estado" placeholder="Estado" pInputText />
+                  <ng-container *ngFor="let erro of mensagens['estado']">
+                    <span class="msg-error" *ngIf="form_endereco.get('estado')!.hasError(erro.tipo) && (form_endereco.get('estado')!.dirty || form_endereco.get('estado')!.touched)">
+                      {{erro.mensagem}}
+                    </span>
+                  </ng-container>
                 </div>
                 <div class="col-2">
                   <input type="number" style="width: 100%;" formControlName="numero" placeholder="Número" pInputText />
+                  <ng-container *ngFor="let erro of mensagens['numero']">
+                    <span class="msg-error" *ngIf="form_endereco.get('numero')!.hasError(erro.tipo) && (form_endereco.get('numero')!.dirty || form_endereco.get('numero')!.touched)">
+                      {{erro.mensagem}}
+                    </span>
+                  </ng-container>
                 </div>
               </div>
               <br>
@@ -127,10 +153,10 @@
                   <p style="font-size: 13px; color: red;">{{this.error_msg}}</p>
                   <p style="font-size: 13px; color: green;" *ngIf="success_msg">Cadastrado com sucesso!!</p>
                 </div>
-              </div><br><br><br>
+              </div><br><br>
               <div class="grid">
                 <div class="col-12">
-                  <button pButton pRipple type="button" (click)="createAccount()" label="Cadastrar"
+                  <button pButton pRipple type="submit" (click)="createAccount()" label="Cadastrar"
                     class="p-button-rounded p-button-success"></button>
                 </div>
               </div>
@@ -235,7 +261,6 @@
               </div>
             </ng-template>
           </p-overlayPanel>
-          <!-- <p-avatar shape="circle" class="margin-2em" image="assets/perfil.jpg" size="xlarge"></p-avatar> -->
         </div>
       </div>
     </div>

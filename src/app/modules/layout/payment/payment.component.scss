@@ -31,6 +31,11 @@
       float: right;
     }
   }
+  .icon-delete {
+    margin-top: 0.7em;
+    margin-left: 1em;
+    cursor: pointer;
+  }
 }
 
 .final-text-cart {
@@ -42,4 +47,13 @@
 .grid {
   margin: 0;
   padding: 0;
+}
+
+.spinner, p-image {
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.text-paid-with-success {
+  text-align: center;
 }

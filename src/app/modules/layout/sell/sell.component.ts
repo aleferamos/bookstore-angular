@@ -66,7 +66,7 @@ export class SellComponent implements OnInit {
 
  async anunciar(){
     if(!this.file){
-      this.messageService.add({severity:'error', summary: 'Ops...', detail: 'Selecione uma imagem'});
+      this.messageService.add({key: 'bc', severity:'error', summary: 'Ops...', detail: 'Selecione uma imagem'});
     } else {
       if(this.form_anuncioSave.valid){
         this.produtoSave.codigoBarra = this.livroSave.titulo = this.form_anuncioSave.value.codigoDeBarras;

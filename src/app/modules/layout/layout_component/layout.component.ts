@@ -62,6 +62,36 @@ export class LayoutComponent implements OnInit {
   loadingLogin = false;
   spinnerLoadLivros = false;
 
+  mensagens = {
+    nome: [
+      { tipo: 'required', mensagem: 'Nome é obrigatório'},
+      { tipo: 'minlength', mensagem: 'O nome tem que conter ao menos 3 caracteres!'}],
+      cep: [
+        { tipo: 'required', mensagem: 'Cep é obrigatório'}],
+    email: [
+      { tipo: 'email', mensagem: 'Digite um e-mail válido'},
+      { tipo: 'required', mensagem: 'O e-mail é obrigatório!'}],
+    endereco: [
+      { tipo: 'required', mensagem: 'O Endereco é obrigatório!'}],
+    complemento: [
+      { tipo: 'required', mensagem: 'O Complemento é obrigatório!'}],
+    cidade: [
+      { tipo: 'required', mensagem: 'O campo cidade é obrigatório!'}],
+    estado: [
+      { tipo: 'required', mensagem: 'O campo estado é obrigatório!'}],
+    numero: [
+      { tipo: 'required', mensagem: 'O campo número é obrigatório!'}],
+    senha: [
+      { tipo: 'minlength', mensagem: 'A senha deve conter mais que 6 caracteres'},
+      { tipo: 'required', mensagem: 'A senha é obrigatória!'}],
+    senhaConfirmada: [
+      { tipo: 'required', mensagem: 'É obrigatório confirmar senha.' },
+      { tipo: 'comparacao', mensagem: 'Senhas não conferem' }],
+
+    telefone: [
+      { tipo: 'required', mensagem: 'O telefone é obrigatório' }],
+  };
+
   constructor(
     private viaCepService: ViaCepService,
     private formBuilder: FormBuilder,
@@ -73,24 +103,22 @@ export class LayoutComponent implements OnInit {
     private messageService: MessageService,
     ) {
 
-
-
       this.form_pessoa = this.formBuilder.group({
-        nome: [''],
+        nome: ['', [Validators.required, Validators.minLength(3)]],
       });
 
       this.form_usuario = this.formBuilder.group({
-        email: [''],
-        senha: [''],
+        email: ['', [Validators.required, Validators.minLength(3)]],
+        senha: ['', [Validators.required, Validators.minLength(3)]],
       })
 
       this.form_endereco = this.formBuilder.group({
         cep: [''],
-        endereco: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
-        complemento: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
-        cidade: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
-        estado: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
-        numero: new FormControl({value: '', disabled: this.disabledFalseInputs}, Validators.required),
+        endereco: new FormControl({value: undefined, disabled: this.disabledFalseInputs}, Validators.required),
+        complemento: new FormControl({value: undefined, disabled: this.disabledFalseInputs}, Validators.required),
+        cidade: new FormControl({value: undefined, disabled: this.disabledFalseInputs}, Validators.required),
+        estado: new FormControl({value: undefined, disabled: this.disabledFalseInputs}, Validators.required),
+        numero: new FormControl({value: undefined, disabled: this.disabledFalseInputs}, Validators.required),
         notExistCep: [true]
       })
 
@@ -105,7 +133,6 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.transferLivroService.currentMessageSubTotal.subscribe(preco => {
       this.subtotal = preco
-
     })
 
     this.transferLivroService.currentMessageCart.subscribe(books => {
@@ -168,8 +195,7 @@ export class LayoutComponent implements OnInit {
   }
 
   removeCart(book: IAnuncioList) {
-    this.cart.splice(this.cart.indexOf(book), 1)
-    this.subtotal -= book.preco;
+    this.transferLivroService.removeBookFromCart(book)
   }
 
   disabledInputs(event: any){
@@ -193,18 +219,17 @@ export class LayoutComponent implements OnInit {
     this.pessoaSave.endereco = this.enderecoSave;
     this.pessoaSave.usuario = this.usuarioSave;
 
-
-    this.pessoaService.save(this.pessoaSave).then(sucess => {
-      this.success_msg = true;
-      this.error_msg = '';
-    }).catch(error => {
-      (error.error);
-      this.success_msg = false;
-        this.error_msg = error.error.erro
-    });
-
+    if(this.validateForms(this.form_endereco, this.form_pessoa, this.form_usuario)){
+      this.pessoaService.save(this.pessoaSave).then(() => {
+        this.success_msg = true;
+        this.error_msg = '';
+      }).catch(error => {
+        this.success_msg = false;
+      });
+    } else {
+      this.messageService.add({severity:'error', summary: 'Ops...', detail: 'Algum campo está vazio'});
+    }
   }
-
 
   logout(){
     this.accountService.logoff();
@@ -238,7 +263,20 @@ export class LayoutComponent implements OnInit {
     } else {
       this.messageService.add({severity:'error', summary: 'Ops...', detail: 'Você precisa estar logado!'});
     }
+  }
 
+  validateForms(endereco_form: FormGroup, pessoa_form: FormGroup, form_usuario: FormGroup){
+    if(endereco_form.value.endereco != undefined
+      && endereco_form.value.complemento != undefined
+      && endereco_form.value.cidade != undefined
+      && endereco_form.value.estado != undefined
+      && endereco_form.value.numero != undefined
+      && form_usuario.valid
+      && pessoa_form.valid){
+        return true;
+      } else {
+        return false;
+      }
   }
 
 
