@@ -76,27 +76,29 @@ export class PaymentComponent implements OnInit {
     this.payment.total = this.subTotal + 50;
 
 
-    this.paymentService.save(this.payment).subscribe(success => {
+    this.paymentService.save(this.payment).subscribe(() => {
+
     this.loadingFinalizePayment = true;
     this.HidePaymentWindow = false;
+
+    this.itensCart.forEach(item => {
+      this.anuncioService.changeStatus(item.id!, 3);
+    })
 
     setTimeout(() => {
       this.loadingFinalizePayment = false;
       this.paidWithSuccessAnimation = true;
       setTimeout(() => {
+        this.transferLivroService.clearCart()
         this.router.navigate(['home'])
       }, 2500);
     }, 2000);
     })
-
-
-
-
-
   }
 
   async loadPessoaAuthenticad(){
     this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(window.localStorage.getItem('token')!));
   }
+
 
 }

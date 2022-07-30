@@ -39,4 +39,9 @@ export class TransferLivroService {
     }
   }
 
+  clearCart(){
+    this.AnnouncementList = [];
+    this.messageSourceCart.next(this.AnnouncementList)
+  }
+
 }

@@ -131,6 +131,9 @@ export class LayoutComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+
+
     this.transferLivroService.currentMessageSubTotal.subscribe(preco => {
       this.subtotal = preco
     })
@@ -138,6 +141,7 @@ export class LayoutComponent implements OnInit {
     this.transferLivroService.currentMessageCart.subscribe(books => {
       this.cart = books;
     })
+
   }
 
   async isAuthenticad(){
@@ -146,15 +150,22 @@ export class LayoutComponent implements OnInit {
     token.token = window.localStorage.getItem("token")!;
 
     if(token.token){
-      this.accountService.tokenIsValid(token).then(async success => {
-        if(success){
-          this.userIsAuthenticad = true;
-          this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
+      this.pessoaService.getUserAuthenticad(window.localStorage.getItem("token")!).subscribe(data => {
+        if(data.usuario.perfil == "USER"){
+          this.accountService.tokenIsValid(token).then(async success => {
+            if(success){
+              this.userIsAuthenticad = true;
+              this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
+            } else {
+              window.localStorage.removeItem('token')
+            }
+          });
         } else {
-          window.localStorage.removeItem('token')
+          this.accountService.logoff()
         }
-      }).catch(error => {
       })
+
+
     }
   }
 
@@ -176,6 +187,8 @@ export class LayoutComponent implements OnInit {
   }
 
   login(){
+
+
     this.accountService.login(this.form_login.value).then(success => {
       this.text_msg_login = undefined;
       this.loadingLogin = true;
