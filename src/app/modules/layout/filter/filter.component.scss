@@ -1,0 +1,34 @@
+// .col-1, .col-2 {
+//   border: solid 1px;
+// }
+
+.grid {
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  width: 100%;
+  background-color: rgb(235, 233, 233);
+  padding: 10px;
+}
+
+.name {
+  border-radius: 10px;
+}
+
+.card {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  p {
+    font-size: 13px;
+  }
+
+  .coast {
+    text-align: center;
+    color: green;
+  }
+
+
+}

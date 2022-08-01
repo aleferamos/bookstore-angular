@@ -29,9 +29,11 @@ export class AccountService {
     return token!;
   }
 
-  async tokenIsValid(token: IToken) {
+   tokenIsValid(token: IToken):Observable<boolean>{
 
-    return await this.http.post<any>(`${environment.api}/autenticacao/validar`, token, {headers: {Authorization: 'Bearer ' + token.token}}).toPromise();
+    return this.http.post<boolean>(`${environment.api}/autenticacao/validar`, token, {headers: {Authorization: 'Bearer ' + token.token}}).pipe(
+      map(response => response)
+    )
   }
 
   async logoff(): Promise<void> {

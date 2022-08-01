@@ -27,6 +27,8 @@ import {TabViewModule} from 'primeng/tabview';
 import {SplitterModule} from 'primeng/splitter';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {SidebarModule} from 'primeng/sidebar';
+import {SliderModule} from 'primeng/slider';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [],
@@ -60,7 +62,9 @@ import {SidebarModule} from 'primeng/sidebar';
     TabViewModule,
     SplitterModule,
     CascadeSelectModule,
-    SidebarModule
+    SidebarModule,
+    SliderModule,
+    TagModule
   ]
 })
 export class CoreModule { }

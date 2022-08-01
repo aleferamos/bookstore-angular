@@ -1,0 +1,35 @@
+<div class="grid">
+  <div class="col-2">
+    <h3>Filtros</h3>
+    <h5>Preço: R$ {{rangeValues[0] + ' - ' + rangeValues[1]}} R$</h5>
+    <p-slider [(ngModel)]="rangeValues" (onChange)="filterBooks()" [range]="true"></p-slider><br>
+    <form [formGroup]="form_filterName">
+
+  </form>
+  </div>
+  <div class="col-10">
+    <div class="board">
+      <div class="grid">
+        <div class="col-12">
+          <input type="text" formControlName="nome" class="name" (keyup)="filterBooks()" placeholder="Busque aqui por um titulo" pInputText>
+        </div>
+      </div>
+      <div class="grid" >
+        <div class="col-2" *ngFor="let item of anuncioLoaded">
+          <div class="card">
+            <p-card>
+              <h4>{{item.livro?.titulo}}</h4>
+              <p-image src="assets/images_posts/{{item.nomeImagem}}" alt="Image" width="185"></p-image>
+              <p class="coast">R$ {{item.preco}},00</p>
+              <div class="flex justify-content-center flex-wrap card-container yellow-container">
+                <button pButton pRipple type="button" (click)="ViewAnnouncement(item)" icon="pi pi-eye" class="p-button-rounded p-button-outlined"></button>
+            </div><br>
+
+              <button pButton pRipple type="button" (click)="addBooksToCart(item)" label="Adicionar no carrinho" class="p-button-outlined p-button-info"></button>
+          </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

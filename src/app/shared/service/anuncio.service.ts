@@ -44,4 +44,13 @@ export class AnuncioService {
     .set('id', idAnuncio)
     .set('status', status)}).toPromise();
   }
+
+  async getAllByNameAndRageCustom(nome?: string, menorPreco?: string, maiorPreco?: string){
+    var url = `${environment.api}/anuncio/listarPorNomeEIntervaloDeCusto`
+      return await this.http.get<IAnuncioList[]>(url, {params: new HttpParams()
+        .set('nome', nome ? nome : "")
+        .set('menorPreco', menorPreco ? menorPreco : "")
+        .set('maiorPreco', maiorPreco ? maiorPreco : "")}).toPromise();
+  }
+
 }

@@ -23,6 +23,7 @@ import { EditorImgComponent } from './components/editor-img/editor-img.component
 import { AdminModule } from './modules/admin/admin.module';
 import { RippleModule } from 'primeng/ripple';
 import { PaymentComponent } from './modules/layout/payment/payment.component';
+import { FilterComponent } from './modules/layout/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PaymentComponent } from './modules/layout/payment/payment.component';
     LoginComponent,
     SystemComponent,
     AnnouncementComponent,
-    PaymentComponent
+    PaymentComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

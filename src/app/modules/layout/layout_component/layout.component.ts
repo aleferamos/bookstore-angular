@@ -131,9 +131,6 @@ export class LayoutComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
-
-
     this.transferLivroService.currentMessageSubTotal.subscribe(preco => {
       this.subtotal = preco
     })
@@ -146,26 +143,18 @@ export class LayoutComponent implements OnInit {
 
   async isAuthenticad(){
     let token: IToken = {} as IToken;
-
     token.token = window.localStorage.getItem("token")!;
+    const isValid = await lastValueFrom(this.accountService.tokenIsValid(token));
 
-    if(token.token){
-      this.pessoaService.getUserAuthenticad(window.localStorage.getItem("token")!).subscribe(data => {
+    if(isValid){
+      this.pessoaService.getUserAuthenticad(window.localStorage.getItem("token")!).subscribe(async data => {
         if(data.usuario.perfil == "USER"){
-          this.accountService.tokenIsValid(token).then(async success => {
-            if(success){
-              this.userIsAuthenticad = true;
-              this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
-            } else {
-              window.localStorage.removeItem('token')
-            }
-          });
+          this.userIsAuthenticad = true;
+          this.pessoaAuthenticad = await lastValueFrom(this.pessoaService.getUserAuthenticad(token.token));
         } else {
           this.accountService.logoff()
         }
       })
-
-
     }
   }
 
@@ -267,6 +256,11 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  RedirectBookSearchToPageAnnouncements(announcement?: any){
+    setTimeout(() => {
+      this.route.navigate([`announcements/${announcement?.volumeInfo.title ? announcement?.volumeInfo.title : ""}`]);
+    }, 200);
+  }
 
   sell(){
     if(localStorage.getItem("token")){

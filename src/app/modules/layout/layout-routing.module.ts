@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout_component/layout.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { PaymentComponent } from './payment/payment.component';
+import { FilterComponent } from './filter/filter.component';
 
 const routes: Routes = [
   {path: '', component: LayoutComponent,
@@ -20,6 +21,8 @@ const routes: Routes = [
       {path: 'sell', canActivate: [AuthGuard], component: SellComponent},
       {path: 'announcement/:id', component: AnnouncementComponent},
       {path: 'payment', canActivate: [AuthGuard, ProtectedPaymentPage], component: PaymentComponent},
+      {path: 'announcements', component: FilterComponent},
+      {path: 'announcements/:title', component: FilterComponent},
     ]
 },
 ];
